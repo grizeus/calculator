@@ -3,8 +3,7 @@
 
 int main(int argc, char** argv) 
 {
-    Calculator calculator;
-    calculator.Execution();
-    // return Calculator().Execution();
-    return 0;
+
+    return Calculator().Run();
+    // return 0;
 }
