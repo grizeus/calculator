@@ -1,0 +1,14 @@
+{
+  "OutputFoldersPerTargetSystem": {
+    "Local Machine": [
+      "out\\build\\WSL-Clang-Debug",
+      "out\\install\\WSL-Clang-Debug"
+    ]
+  },
+  "ExpandedNodes": [
+    "",
+    "\\lib\\x64"
+  ],
+  "SelectedNode": "\\CMakeSettings.json",
+  "PreviewInSolutionExplorer": false
+}
