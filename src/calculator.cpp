@@ -16,19 +16,19 @@ void Calculator::DisplayResult()
     
 }
 
-bool Calculator::Run()
-{
-    for (1)
-    {
-        while (event)
-        {
-            if Quit:
-                return false;
+// int Calculator::Run()
+// {
+//     for (1)
+//     {
+//         while (event)
+//         {
+//             if Quit:
+//                 return 0;
             
-        }
-    }
-    return false; 
-}
+//         }
+//     }
+//     return false; 
+// }
 
 void Calculator::Compute()
 {

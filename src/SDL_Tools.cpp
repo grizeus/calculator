@@ -5,11 +5,11 @@
 
 bool SDL_Tools::ToolsInit()
 {
-     if (SDL_Init(SDL_INIT_VIDEO) != 0)
-     {
-        throw std::runtime_error("SDL failed initialization!\n");
-        return false;
-     }
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
+    {
+       throw std::runtime_error("SDL failed initialization!\n");
+       return false;
+    }
     if (SDL_CreateWindowAndRenderer(m_WindowWidth, m_WindowHeight, 0, &m_Window, &m_Renderer) != 0)
     {
         throw std::runtime_error(SDL_GetError());

@@ -1,12 +1,10 @@
 #pragma once
 #include "UI_Element.hpp"
 
-class Display
+class Display : public UI_Element
 {
 public:
-    Display();
+    Display(SDL_Tools* drawer);
     
     void Draw(std::string);
-private:
-    UI_Element m_UI;
 };
