@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include "Display.hpp"
+#include "InputHandler.hpp"
 
 class Calculator 
 {

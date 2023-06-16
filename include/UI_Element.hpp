@@ -4,16 +4,20 @@
 #include <string>
 #include "SDL_Tools.hpp"
 
+using coordinate = std::pair<float, float>;
+using u64 = uint64_t;
 struct UI_Element 
 {
+    UI_Element();
+    UI_Element(int, int, coordinate, u64, u64, u64, u64);
     int m_Height;
     int m_Width;
-    std::pair<float, float> m_Position;
+    coordinate m_Position;
 
-    uint64_t m_BackgroundColor;
-    uint64_t m_HoverBackgroundColor;
-    uint64_t m_BorderColor;
-    uint64_t m_ContentColor;
+    u64 m_BackgroundColor;
+    u64 m_HoverBackgroundColor;
+    u64 m_BorderColor;
+    u64 m_ContentColor;
 
     // void Draw(std::string);
     // void Hover(bool);
