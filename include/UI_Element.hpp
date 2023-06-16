@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <utility>
 #include <string>
+#include "SDL_Tools.hpp"
 
 struct UI_Element 
 {
@@ -14,8 +15,8 @@ struct UI_Element
     uint64_t m_BorderColor;
     uint64_t m_ContentColor;
 
-    void Draw(std::string);
-    void Hover(bool);
+    // void Draw(std::string);
+    // void Hover(bool);
 private:
-    SDL* m_drawer;
+    SDL_Tools* m_Drawer;
 };
