@@ -1,5 +1,5 @@
 // #include "../include/calculator.hpp"
-#include "calculator.hpp"
+#include "Calculator.hpp"
 #include <stdexcept>
 #include <iostream>
 

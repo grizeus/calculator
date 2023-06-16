@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/calculator.hpp"
+#include "Calculator.hpp"
 
 int main(int argc, char** argv) 
 {
