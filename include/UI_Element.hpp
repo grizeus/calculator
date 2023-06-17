@@ -31,7 +31,6 @@ public:
         return SDLColor;
     }
 
-    // UI_Element(int, int, coordinate, Color, Color, Color, Color, SDL_Tools*);
     UI_Element() = default;
     UI_Element(Tools);
     virtual bool Draw(const std::string&) = 0;

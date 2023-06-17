@@ -27,3 +27,4 @@ void Button::Hover(bool hover)
         SDL_RenderPresent(renderer);
     }
 }
+
