@@ -2,3 +2,4 @@
 build
 media 
 .cal*
+.cache
