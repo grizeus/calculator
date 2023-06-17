@@ -1,7 +1,5 @@
-// #include "../include/SDL_Tools.hpp"
 #include "SDL_Tools.hpp"
 #include <iostream>
-#include <stdexcept>
 
 bool SDL_Tools::ToolsInit()
 {

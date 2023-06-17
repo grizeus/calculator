@@ -1,9 +1,10 @@
 #include <iostream>
 #include "Calculator.hpp"
+#include "UI_Element.hpp"
 
 int main(int argc, char** argv) 
 {
-    std::shared_ptr<SDL_Tools> tool(new SDL_Tools());
+    Tools tool(new SDL_Tools());
     if(!tool->ToolsInit())
     {
         std::cout << "Initialization failed" << std::endl;
@@ -11,9 +12,9 @@ int main(int argc, char** argv)
     }
     InputBoard buttons;
     Calculator calculator;
-    Display display;
+    Display display(tool);
     // TODO init button
-    display.Draw();
+    display.Draw("0");
     buttons.Draw();
     while (true)
     {
@@ -23,5 +24,6 @@ int main(int argc, char** argv)
         if input == quit_code
             break;
     }
+    tool->ToolsQuit();
     return 0;
 }

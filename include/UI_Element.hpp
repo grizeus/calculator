@@ -32,7 +32,8 @@ public:
     }
 
     // UI_Element(int, int, coordinate, Color, Color, Color, Color, SDL_Tools*);
-    UI_Element(SDL_Tools* drawer);
+    UI_Element() = default;
+    UI_Element(Tools);
     virtual bool Draw(const std::string&) = 0;
     virtual void Hover(bool) = 0;
 
@@ -52,7 +53,7 @@ public:
     void SetHoverColor(uint8_t, uint8_t, uint8_t, uint8_t);
     void SetBorderColor(uint8_t, uint8_t, uint8_t, uint8_t);
     void SetContentColor(uint8_t, uint8_t, uint8_t, uint8_t);
-
+    void SetDrawer(Tools);
 private:
     int m_Height;
     int m_Width;

@@ -1,8 +1,8 @@
 #pragma once
-#include <string>
+// #include <string>
 #include "Display.hpp"
 #include "InputBoard.hpp"
-#include <memory>
+// #include <memory>
 // TODO Calculator is state machine (wait 1 operand; wait 2 operand)
 class Calculator 
 {
@@ -10,10 +10,10 @@ public:
     Calculator();
     ~Calculator();
 
-    int Run();
     void Compute();
     void DisplayResult();
     void UserInput(InputCode);
+    void SetDisplay(std::shared_ptr<Display>);
 private:
-    std::shared_ptr<Display> Display;
+    std::shared_ptr<Display> m_Display;
 };

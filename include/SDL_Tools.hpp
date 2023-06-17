@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
-// #include <SDL2/SDL_image.h>
+#include <stdexcept>
 #include <SDL2/SDL_ttf.h>
 
 struct SDL_Tools
