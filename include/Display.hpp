@@ -5,6 +5,6 @@ class Display : public UI_Element
 {
 public:
     Display(SDL_Tools* drawer);
-    
-    void Draw(std::string) override;
+    void Hover(bool) override;
+    bool Draw(const std::string&) override;
 };
