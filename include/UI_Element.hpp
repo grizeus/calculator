@@ -7,6 +7,7 @@
 
 using coordinate = std::pair<float, float>;
 using Tools = std::shared_ptr<SDL_Tools>;
+
 class UI_Element 
 {
 public:
@@ -33,6 +34,8 @@ public:
 
     UI_Element() = default;
     UI_Element(Tools);
+    virtual ~UI_Element() {}
+
     virtual bool Draw(const std::string&) = 0;
     virtual void Hover(bool) = 0;
 

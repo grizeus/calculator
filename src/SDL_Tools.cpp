@@ -33,7 +33,6 @@ void SDL_Tools::ToolsQuit()
 {
     SDL_DestroyRenderer(m_Renderer);
     SDL_DestroyWindow(m_Window);
-    SDL_DestroyTexture(m_Texture);
     TTF_CloseFont(m_Font);
 
     m_Renderer = nullptr;
@@ -43,3 +42,5 @@ void SDL_Tools::ToolsQuit()
     TTF_Quit();
     SDL_Quit();
 }
+
+SDL_Tools::~SDL_Tools() { ToolsQuit(); }

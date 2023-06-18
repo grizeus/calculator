@@ -8,6 +8,7 @@ public:
 // TODO add buttons in comstructor
     InputBoard();
     ~InputBoard();
+
     bool AddButton(std::shared_ptr<Button>);
     InputCode CheckInput();
 private:

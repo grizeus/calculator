@@ -21,9 +21,8 @@ int main(int argc, char** argv)
         InputCode input = buttons.CheckInput();
         // TODO checkinput should check hover button state, buttonpressed, keypressed
         calculator.UserInput();
-        if input == quit_code
+        if (input == quit_code)
             break;
     }
-    tool->ToolsQuit();
     return 0;
 }
