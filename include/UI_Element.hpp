@@ -5,7 +5,8 @@
 #include "SDL_Tools.hpp"
 #include <memory>
 
-using coordinate = std::pair<float, float>;
+// (x, y) sequense
+using Coordinate = std::pair<float, float>;
 using ToolsPtr = std::shared_ptr<SDL_Tools>;
 
 class UI_Element 
@@ -34,6 +35,7 @@ public:
 
     UI_Element() = default;
     UI_Element(ToolsPtr);
+    UI_Element(Coordinate, ToolsPtr);
     virtual ~UI_Element() {}
 
     virtual bool Draw(const std::string&) = 0;
@@ -41,7 +43,7 @@ public:
 
     int GetHeight() const{ return m_Height; }
     int GetWidth() const { return m_Width; }
-    coordinate GetPosition() const {return m_Position; } 
+    Coordinate GetPosition() const {return m_Position; } 
     Color GetBackgroundColor() const{ return m_BackgroundColor; }
     Color GetHoverColor() const { return m_HoverBackgroundColor; }
     Color GetBorderColor() const { return m_BorderColor; }
@@ -59,7 +61,7 @@ public:
 private:
     int m_Height;
     int m_Width;
-    coordinate m_Position;
+    Coordinate m_Position;
 
     Color m_BackgroundColor;
     Color m_HoverBackgroundColor;

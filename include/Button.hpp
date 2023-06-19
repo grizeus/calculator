@@ -16,6 +16,9 @@ class Button : public UI_Element
 public:
     Button() = default;
     Button(const std::string&, InputCode, ToolsPtr);
+    Button(Coordinate, ToolsPtr, const std::string&, InputCode);
+
+
     ~Button();
 
     void Hover(bool) override;
@@ -24,6 +27,5 @@ public:
 private:
     std::string m_Symbol;
     InputCode m_Code;
-    
-    ToolsPtr m_Drawer;
+    // ToolsPtr m_Drawer; // in UI_Element?
 };
