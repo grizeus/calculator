@@ -1,16 +1,18 @@
 #pragma once
 #include <array>
 #include "Button.hpp"
+// #include "UI_Element.hpp"
 
 class InputBoard
 {
 public:
-// TODO add buttons in comstructor
-    InputBoard();
+// TODO add buttons in costructor
+    InputBoard(ToolsPtr);
     ~InputBoard();
 
-    bool AddButton(std::shared_ptr<Button>);
+    void AddButton(const std::string&, InputCode, int);
     InputCode CheckInput();
 private:
-    std::array<std::shared_ptr<Button>, 24> m_Buttons;
+    std::array<Button, 24> m_Buttons;
+    ToolsPtr m_Drawer;
 };

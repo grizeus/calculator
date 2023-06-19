@@ -6,7 +6,7 @@
 #include <memory>
 
 using coordinate = std::pair<float, float>;
-using Tools = std::shared_ptr<SDL_Tools>;
+using ToolsPtr = std::shared_ptr<SDL_Tools>;
 
 class UI_Element 
 {
@@ -33,7 +33,7 @@ public:
     }
 
     UI_Element() = default;
-    UI_Element(Tools);
+    UI_Element(ToolsPtr);
     virtual ~UI_Element() {}
 
     virtual bool Draw(const std::string&) = 0;
@@ -46,7 +46,7 @@ public:
     Color GetHoverColor() const { return m_HoverBackgroundColor; }
     Color GetBorderColor() const { return m_BorderColor; }
     Color GetContentColor() const { return m_ContentColor; }
-    Tools GetTools() const { return m_Drawer; }
+    ToolsPtr GetTools() const { return m_Drawer; }
 
     void SetHeight(int);
     void SetWidth(int);
@@ -55,7 +55,7 @@ public:
     void SetHoverColor(uint8_t, uint8_t, uint8_t, uint8_t);
     void SetBorderColor(uint8_t, uint8_t, uint8_t, uint8_t);
     void SetContentColor(uint8_t, uint8_t, uint8_t, uint8_t);
-    void SetDrawer(Tools);
+    void SetTools(ToolsPtr);
 private:
     int m_Height;
     int m_Width;
@@ -65,5 +65,5 @@ private:
     Color m_HoverBackgroundColor;
     Color m_BorderColor;
     Color m_ContentColor;
-    Tools m_Drawer;
+    ToolsPtr m_Drawer;
 };

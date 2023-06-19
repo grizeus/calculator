@@ -4,7 +4,7 @@
 class Display : public UI_Element
 {
 public:
-    Display(Tools drawer);
+    Display(ToolsPtr drawer);
     void Hover(bool) override;
     bool Draw(const std::string&) override;
 };

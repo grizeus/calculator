@@ -2,7 +2,7 @@
 #include "SDL_render.h"
 
 
-Display::Display(Tools drawer)
+Display::Display(ToolsPtr drawer)
     : UI_Element(drawer) 
 {
     SetHeight(10);
@@ -42,13 +42,9 @@ bool Display::Draw(const std::string& content)
     return true;
 }
 
-void Display::Hover(bool hover)
-{
-    if (hover)
-    {
-        
-    }
-}
+void Display::Hover(bool)
+{ /* stub */ }
+
 // uint32_t color = 0xFF;
 // color = color << 8;
 // color = color | 0xA5;

@@ -4,13 +4,13 @@
 
 int main(int argc, char** argv) 
 {
-    Tools tool(new SDL_Tools());
+    ToolsPtr tool(new SDL_Tools());
     if(!tool->ToolsInit())
     {
         std::cout << "Initialization failed" << std::endl;
         return 1;
     }
-    InputBoard buttons;
+    InputBoard buttons(tool);
     Calculator calculator;
     Display display(tool);
     // TODO init button
