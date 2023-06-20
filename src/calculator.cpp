@@ -2,8 +2,8 @@
 #include <iostream>
 
 Calculator::Calculator()
-{
-}
+    : m_State(new WaitOperand1())
+{ }
 
 Calculator::~Calculator()
 {
@@ -24,4 +24,6 @@ void Calculator::Compute()
 
 }
 
-
+void Calculator::UserInput(InputCode input)
+{
+}

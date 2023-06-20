@@ -10,12 +10,14 @@ int main(int argc, char** argv)
         std::cout << "Initialization failed" << std::endl;
         return 1;
     }
-    InputBoard buttons(tool);
     Calculator calculator;
+    InputBoard buttons(tool);
     Display display(tool);
+    calculator.SetDisplay(std::make_shared<Display>(display));
     // TODO init button
     display.Draw("0");
-    buttons.Draw();
+    for (int i = 0; i < buttons.GetButtons().size(); ++i)
+        buttons.GetButtons()[i].Draw("");
     while (true)
     {
         InputCode input = buttons.CheckInput();
