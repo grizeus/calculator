@@ -1,5 +1,4 @@
-#include "Display.hpp"
-#include "SDL_render.h"
+#include "../include/Display.hpp"
 
 
 Display::Display(ToolsPtr drawer)

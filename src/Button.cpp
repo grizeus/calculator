@@ -1,6 +1,5 @@
-#include "Button.hpp"
-#include "SDL_events.h"
-#include "SDL_ttf.h"
+#include "../include/Button.hpp"
+#include <SDL2/SDL_ttf.h>
 #include <string>
 
 Button::Button(Coordinate pos, ToolsPtr drawer, const std::string& symbol, InputCode code)

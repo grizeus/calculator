@@ -1,11 +1,10 @@
-#include "InputBoard.hpp"
-#include "Button.hpp"
-#include "SDL_events.h"
-#include "SDL_keycode.h"
+#include "../include/InputBoard.hpp"
+// #include "SDL_events.h"
+// #include "SDL_keycode.h"
 #include <iostream>
 
 InputBoard::InputBoard(ToolsPtr drawer)
-    : m_Drawer(drawer)
+    : m_Drawer(drawer) 
 {
     const std::array<std::string, 24> Symbols = {
         "0","1","2","3","4","5","6","7","8","9",
@@ -20,85 +19,85 @@ InputBoard::InputBoard(ToolsPtr drawer)
         }
 }
 
-void InputBoard::AddButton(Coordinate pos, const std::string& symbol, InputCode code, int index)
-{
+void InputBoard::AddButton(Coordinate pos, const std::string& symbol, InputCode code, int index){
     m_Buttons[index] = Button(pos, m_Drawer, symbol, code);
 }
 
-InputCode InputBoard::CheckInput()
-{
-    // TODO GeT_SDL_Input if input Mouse_Move -> check and hover/unhover cor button
-    //                    if input click -> check if click on button (or keyboardevent) -> return button code
-
+InputCode InputBoard::CheckInput(){
     SDL_Event e;
-    while (SDL_WaitEvent(&e))
-    {
-        switch (e.type)
+    bool quit = false;
+    while (quit == false) {
+        while (SDL_WaitEvent(&e))
         {
-        case SDL_MOUSEMOTION:
-            for (int i = 0; i < 24; ++i)
+            switch (e.type)
             {
-                if ((e.button.x <= m_Buttons[i].GetPosition().first + m_Buttons[i].GetWidth()) &&
-                  (e.button.y <= m_Buttons[i].GetPosition().second + m_Buttons[i].GetHeight()))
-                    m_Buttons[i].SetHover(true);
-                else
-                    m_Buttons[i].SetHover(false);
-            std::cout << e.button.x << " " << e.button.y << "\n"; // for debug
-            }
-            break;
-        case SDL_MOUSEBUTTONUP:
-            for (int i = 0; i < 24; ++i)
-            {
-                if (m_Buttons[i].GetHover())
-                    return m_Buttons[i].Click();
-            }
-        case SDL_KEYDOWN:
-            switch (e.key.keysym.sym)
-            {
-            case SDLK_0:
-                return Null;
-            case SDLK_1:
-                return One;
-            case SDLK_2:
-                return Two;
-            case SDLK_3:
-                return Three;
-            case SDLK_4:
-                return Four;
-            case SDLK_5:
-                return Five;
-            case SDLK_6:
-                return Six;
-            case SDLK_7:
-                return Seven;
-            case SDLK_8:
-                return Eight;
-            case SDLK_9:
-                return Nine;
-            case SDLK_PLUS:
-                return Plus;
-            case SDLK_MINUS:
-                return Minus;
-            case SDLK_ASTERISK:
-                return Asterisk;
-            case SDLK_SLASH:
-                return Slash;
-            case SDLK_PERCENT:
-                return Percent;
-            case SDLK_DELETE:
-                return Clear;
-            case SDLK_PERIOD:
-                return Period;
-            case SDLK_EQUALS:
-                return Equal;
-            case SDLK_BACKSPACE:
-                return Backspace;
+            case SDL_MOUSEMOTION:
+                for (int i = 0; i < 24; ++i)
+                {
+                    if ((e.button.x <= m_Buttons[i].GetPosition().first + m_Buttons[i].GetWidth()) &&
+                    (e.button.y <= m_Buttons[i].GetPosition().second + m_Buttons[i].GetHeight()))
+                        m_Buttons[i].SetHover(true);
+                    else
+                        m_Buttons[i].SetHover(false);
+                std::cout << e.button.x << " " << e.button.y << "\n"; // for debug
+                }
+                break;
+            case SDL_MOUSEBUTTONUP:
+                for (int i = 0; i < 24; ++i)
+                {
+                    if (m_Buttons[i].GetHover())
+                        return m_Buttons[i].Click();
+                }
+            case SDL_KEYDOWN:
+                switch (e.key.keysym.sym)
+                {
+                case SDLK_0:
+                    return Zero;
+                case SDLK_1:
+                    return One;
+                case SDLK_2:
+                    return Two;
+                case SDLK_3:
+                    return Three;
+                case SDLK_4:
+                    return Four;
+                case SDLK_5:
+                    return Five;
+                case SDLK_6:
+                    return Six;
+                case SDLK_7:
+                    return Seven;
+                case SDLK_8:
+                    return Eight;
+                case SDLK_9:
+                    return Nine;
+                case SDLK_PLUS:
+                    return Plus;
+                case SDLK_MINUS:
+                    return Minus;
+                case SDLK_ASTERISK:
+                    return Asterisk;
+                case SDLK_SLASH:
+                    return Slash;
+                case SDLK_PERCENT:
+                    return Percent;
+                case SDLK_DELETE:
+                    return Clear;
+                case SDLK_PERIOD:
+                    return Period;
+                case SDLK_EQUALS:
+                    return Equal;
+                case SDLK_BACKSPACE:
+                    return Backspace;
+                default:
+                    return None;
+                }
+            case SDL_QUIT:
+                quit = true;
             default:
                 return None;
+                break;
             }
-        default:
-            return None;
-            break;
         }
     }
     return None;

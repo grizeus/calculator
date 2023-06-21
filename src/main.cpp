@@ -1,6 +1,10 @@
 #include <iostream>
-#include "Calculator.hpp"
-#include "UI_Element.hpp"
+#include "../include/Calculator.hpp"
+#include "../include/Button.hpp"
+#include "../include/Display.hpp"
+#include "../include/InputBoard.hpp"
+#include "../include/UI_Element.hpp"
+#include "../include/SDL_Tools.hpp"
 
 int main(int argc, char** argv) 
 {
@@ -14,17 +18,14 @@ int main(int argc, char** argv)
     InputBoard buttons(tool);
     Display display(tool);
     calculator.SetDisplay(std::make_shared<Display>(display));
-    // TODO init button
     display.Draw("0");
     for (int i = 0; i < buttons.GetButtons().size(); ++i)
         buttons.GetButtons()[i].Draw("");
     while (true)
     {
         InputCode input = buttons.CheckInput();
-        // TODO checkinput should check hover button state, buttonpressed, keypressed
-        calculator.UserInput();
-        if (input == quit_code)
-            break;
+        calculator.Processing(input);
+        calculator.DisplayResult();
     }
     return 0;
 }

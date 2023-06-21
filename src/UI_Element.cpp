@@ -1,5 +1,4 @@
-#include "UI_Element.hpp"
-#include "SDL_Tools.hpp"
+#include "../include/UI_Element.hpp"
 
 UI_Element::UI_Element(ToolsPtr drawer)
                 : m_Drawer(drawer)
