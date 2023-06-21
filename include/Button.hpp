@@ -16,7 +16,7 @@ public:
     Button() = default;
     Button(Coordinate, ToolsPtr, const std::string&, InputCode);
 
-    ~Button();
+    ~Button() { }
 
     void Hover(bool) override;
     bool Draw(const std::string&) override;

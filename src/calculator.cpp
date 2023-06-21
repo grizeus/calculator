@@ -5,9 +5,6 @@ Calculator::Calculator()
     : m_CurrentState(State::WaitForOperand1)
 { }
 
-Calculator::~Calculator()
-{ }
-
 void Calculator::SetDisplay(std::shared_ptr<Display> display)
 {
     m_Display = display;

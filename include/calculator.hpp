@@ -14,7 +14,7 @@ class Calculator {
 
 public:
     Calculator();
-    ~Calculator();
+    ~Calculator() { }
 
     void DisplayResult();
     void SetDisplay(std::shared_ptr<Display>);

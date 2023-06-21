@@ -9,8 +9,7 @@
 using Coordinate = std::pair<float, float>;
 using ToolsPtr = std::shared_ptr<SDL_Tools>;
 
-class UI_Element 
-{
+class UI_Element {
 public:
     struct Color
     {
@@ -36,7 +35,7 @@ public:
     UI_Element() = default;
     UI_Element(ToolsPtr);
     UI_Element(Coordinate, ToolsPtr);
-    virtual ~UI_Element() {}
+    virtual ~UI_Element() { }
 
     virtual bool Draw(const std::string&) = 0;
     virtual void Hover(bool) = 0;

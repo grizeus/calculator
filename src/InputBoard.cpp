@@ -1,6 +1,4 @@
 #include "../include/InputBoard.hpp"
-// #include "SDL_events.h"
-// #include "SDL_keycode.h"
 #include <iostream>
 
 InputBoard::InputBoard(ToolsPtr drawer)

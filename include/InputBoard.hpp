@@ -6,7 +6,7 @@ class InputBoard
 {
 public:
     InputBoard(ToolsPtr);
-    ~InputBoard();
+    ~InputBoard() { }
 
     void AddButton(Coordinate, const std::string&, InputCode, int);
     InputCode CheckInput();

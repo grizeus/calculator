@@ -7,7 +7,7 @@ struct SDL_Tools
 {
     bool ToolsInit();
     void ToolsQuit();
-    virtual ~SDL_Tools();
+    ~SDL_Tools();
 
     int m_WindowWidth = 498; // win ref
     int m_WindowHeight = 501; // win ref
