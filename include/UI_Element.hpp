@@ -34,7 +34,6 @@ public:
 
     UI_Element() = default;
     UI_Element(ToolsPtr);
-    UI_Element(Coordinate, ToolsPtr);
     virtual ~UI_Element() { }
 
     virtual bool Draw(const std::string&) = 0;

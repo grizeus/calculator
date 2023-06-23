@@ -3,10 +3,11 @@
 #include <string>
 
 Button::Button(Coordinate pos, ToolsPtr drawer, const std::string& symbol, InputCode code)
-    : UI_Element(pos, drawer), m_Symbol(symbol), m_Code(code)
+    : UI_Element(drawer), m_Symbol(symbol), m_Code(code)
 {
     SetHeight(50);
     SetWidth(100);
+    SetPosition(pos.first, pos.second);
     SetBorderColor(0x1E, 0x90, 0xFF, 0xCF); // dodger blue
     SetBackgroundColor(0xFF, 0xFF, 0xFF, 0xFF);
     SetHoverColor(0xF5, 0xFF, 0xFA, 0xFF); // mint cream
@@ -40,7 +41,7 @@ void Button::Hover(bool hover)
 
 bool Button::Draw(const std::string& content)
 {
-    SDL_Renderer* renderer = GetTools()->m_Renderer;
+    SDL_Renderer* renderer = GetTools()->m_Renderer; // TODO SEGFAULT is ocuring here
     SDL_Rect ButtonRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()}; 
     SDL_SetRenderDrawColor(renderer, GetBackgroundColor().red, GetBackgroundColor().green, GetBackgroundColor().blue, GetBackgroundColor().alpha);
     SDL_RenderFillRect(renderer, &ButtonRect);

@@ -20,7 +20,7 @@ bool SDL_Tools::ToolsInit()
         throw std::runtime_error(TTF_GetError());
         return false;
     } 
-    m_Font = TTF_OpenFont("media/lazy.ttf", 15);
+    m_Font = TTF_OpenFont("../media/lazy.ttf", 15);
 	if (m_Font == NULL)
     {
         throw std::runtime_error(TTF_GetError());

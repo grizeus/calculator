@@ -1,11 +1,7 @@
 #include "../include/UI_Element.hpp"
 
 UI_Element::UI_Element(ToolsPtr drawer)
-                : m_Drawer(drawer)
-{ }
-
-UI_Element::UI_Element(Coordinate pos, ToolsPtr drawer)
-        : m_Position(pos), m_Drawer(drawer)
+        : m_Drawer(drawer)
 { }
 
 void UI_Element::SetHeight(int h) { m_Height = h; }

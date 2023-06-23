@@ -2,4 +2,6 @@
 build
 media 
 .cal*
-.cache
+.cache/*
+.cache/clangd/*
+.git
