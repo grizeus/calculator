@@ -2,8 +2,7 @@
 #include <array>
 #include "Button.hpp"
 
-class InputBoard
-{
+class InputBoard {
 public:
     InputBoard(ToolsPtr);
     ~InputBoard() { }

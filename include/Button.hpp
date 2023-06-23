@@ -2,16 +2,14 @@
 #include "SDL_Tools.hpp"
 #include "UI_Element.hpp"
 
-enum InputCode 
-{
+enum InputCode {
     None = 0,
     Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine,
     Plus, Minus, Asterisk, Slash, Percent, Inverse, Square, SquareRoot,
     Clear, ClearEntry, Period, PlusMinus, Equal, Backspace
 };
 
-class Button : public UI_Element
-{
+class Button : public UI_Element {
 public:
     Button() = default;
     Button(Coordinate, ToolsPtr, const std::string&, InputCode);

@@ -39,23 +39,20 @@ void Button::Hover(bool hover)
     }
 }
 
-bool Button::Draw(const std::string& content)
-{
+bool Button::Draw(const std::string& content) {
     SDL_Renderer* renderer = GetTools()->m_Renderer; // TODO SEGFAULT is ocuring here
     SDL_Rect ButtonRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()}; 
     SDL_SetRenderDrawColor(renderer, GetBackgroundColor().red, GetBackgroundColor().green, GetBackgroundColor().blue, GetBackgroundColor().alpha);
     SDL_RenderFillRect(renderer, &ButtonRect);
     SDL_Surface* TextSurface = TTF_RenderUTF8_Solid(GetTools()->m_Font, m_Symbol.c_str(), ConvertToSDLColor(GetContentColor()));
-    if (TextSurface == nullptr)
-    {
+    if (TextSurface == nullptr) {
         throw std::runtime_error(SDL_GetError());
         return false;
     }
 
     SDL_Texture* TextTexture = SDL_CreateTextureFromSurface(renderer, TextSurface);
     SDL_FreeSurface(TextSurface);
-    if (TextTexture == nullptr)
-    {
+    if (TextTexture == nullptr) {
         throw std::runtime_error(TTF_GetError());
         return false;
     }
@@ -65,13 +62,10 @@ bool Button::Draw(const std::string& content)
     return true;
 }
 
-InputCode Button::Click()
-{
+InputCode Button::Click() {
     SDL_Event e;
-    while (SDL_WaitEvent(&e))
-    {
-        switch (e.type)
-        {
+    while (SDL_WaitEvent(&e)) {
+        switch (e.type) {
         case SDL_MOUSEBUTTONUP:
             if ((e.button.x <= GetPosition().first + GetWidth()) && (e.button.y <= GetPosition().second + GetHeight()))
                 return m_Code;
@@ -86,5 +80,7 @@ InputCode Button::Click()
 void Button::SetHover(bool hover) { m_IsHover = hover; }
 
 bool Button::GetHover() const { return m_IsHover; }
+
 InputCode Button::GetCode() const { return m_Code; }
+
 std::string Button::GetSymbol() const { return m_Symbol;}

@@ -22,8 +22,8 @@ public:
     uint8_t alpha;
     };
 
-    SDL_Color ConvertToSDLColor(const Color& c) 
-    {
+// TODO ask about return without copy
+    SDL_Color ConvertToSDLColor(const Color& c) {
         SDL_Color SDLColor;
         SDLColor.r = c.red;
         SDLColor.g = c.green;

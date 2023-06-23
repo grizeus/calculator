@@ -11,7 +11,6 @@ enum class State {
 };
 
 class Calculator {
-
 public:
     Calculator();
     ~Calculator() { }

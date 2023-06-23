@@ -5,13 +5,11 @@ Calculator::Calculator()
     : m_CurrentState(State::WaitForOperand1)
 { }
 
-void Calculator::SetDisplay(std::shared_ptr<Display> display)
-{
+void Calculator::SetDisplay(std::shared_ptr<Display> display) {
     m_Display = display;
 }
 
-void Calculator::DisplayResult()
-{
+void Calculator::DisplayResult() {
     m_Display->Draw("RESULT");
 }
 
@@ -128,16 +126,16 @@ double Calculator::Compute(const std::string& str1, const std::string& str2) {
 }
 
 double Calculator::Compute(const std::string& str) {
-        double result;
-        switch (m_Op) {
-            case '%':
-                result = std::stod(str) / 100;
-            case 's':
-                result = std::stod(str) * std::stod(m_Operand1);
-            case 'r':
-                result = sqrt(std::stod(str));
-            case 'i':
-                result = 1 / std::stod(str);
-        }
-        return result;
+    double result;
+    switch (m_Op) {
+        case '%':
+            result = std::stod(str) / 100;
+        case 's':
+            result = std::stod(str) * std::stod(m_Operand1);
+        case 'r':
+            result = sqrt(std::stod(str));
+        case 'i':
+            result = 1 / std::stod(str);
     }
+    return result;
+}

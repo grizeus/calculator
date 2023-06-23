@@ -6,11 +6,9 @@
 #include "../include/UI_Element.hpp"
 #include "../include/SDL_Tools.hpp"
 
-int main(int argc, char** argv) 
-{
+int main(int argc, char** argv) {
     ToolsPtr tool(new SDL_Tools());
-    if(!tool->ToolsInit())
-    {
+    if(!tool->ToolsInit()) {
         std::cout << "Initialization failed" << std::endl;
         return 1;
     }
@@ -21,8 +19,7 @@ int main(int argc, char** argv)
     display.Draw("0");
     for (int i = 0; i < buttons.GetButtons().size(); ++i)
         buttons.GetButtons()[i].Draw("");
-    while (true)
-    {
+    while (true) {
         InputCode input = buttons.CheckInput();
         calculator.Processing(input);
         calculator.DisplayResult();

@@ -3,8 +3,7 @@
 #include <stdexcept>
 #include <SDL2/SDL_ttf.h>
 
-struct SDL_Tools
-{
+struct SDL_Tools {
     bool ToolsInit();
     void ToolsQuit();
     ~SDL_Tools();

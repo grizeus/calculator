@@ -9,12 +9,13 @@ InputBoard::InputBoard(ToolsPtr drawer)
         "+","-","X", "÷","%","⅟x","x²","√",
         "C","CE",".","±","=","⌫"
     };
-    for (int i = 0; i < 6; ++i)
-        for (int j = 0; j < 4; ++j)
-        {
+
+    for (int i = 0; i < 6; ++i) {
+        for (int j = 0; j < 4; ++j) {
             Coordinate coord = std::make_pair(static_cast<float>(30.0 + 100 * j), static_cast<float>(440.0 - 50 * i));
             AddButton(coord, Symbols[j + i * 4], static_cast<InputCode>(j + i * 4 + 1), i);
         }
+    }
 }
 
 void InputBoard::AddButton(Coordinate pos, const std::string& symbol, InputCode code, int index){
@@ -25,15 +26,11 @@ InputCode InputBoard::CheckInput(){
     SDL_Event e;
     bool quit = false;
     while (quit == false) {
-        while (SDL_WaitEvent(&e))
-        {
-            switch (e.type)
-            {
+        while (SDL_WaitEvent(&e)) {
+            switch (e.type) {
             case SDL_MOUSEMOTION:
-                for (int i = 0; i < 24; ++i)
-                {
-                    if ((e.button.x <= m_Buttons[i].GetPosition().first + m_Buttons[i].GetWidth()) &&
-                    (e.button.y <= m_Buttons[i].GetPosition().second + m_Buttons[i].GetHeight()))
+                for (int i = 0; i < 24; ++i) {
+                    if ((e.button.x <= m_Buttons[i].GetPosition().first + m_Buttons[i].GetWidth()) && (e.button.y <= m_Buttons[i].GetPosition().second + m_Buttons[i].GetHeight()))
                         m_Buttons[i].SetHover(true);
                     else
                         m_Buttons[i].SetHover(false);
@@ -41,14 +38,12 @@ InputCode InputBoard::CheckInput(){
                 }
                 break;
             case SDL_MOUSEBUTTONUP:
-                for (int i = 0; i < 24; ++i)
-                {
+                for (int i = 0; i < 24; ++i) {
                     if (m_Buttons[i].GetHover())
                         return m_Buttons[i].Click();
                 }
             case SDL_KEYDOWN:
-                switch (e.key.keysym.sym)
-                {
+                switch (e.key.keysym.sym) {
                 case SDLK_0:
                     return Zero;
                 case SDLK_1:
