@@ -1,4 +1,7 @@
 #include "../include/SDL_Tools.hpp"
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_video.h>
 #include <iostream>
 
 bool SDL_Tools::ToolsInit()
@@ -7,12 +10,14 @@ bool SDL_Tools::ToolsInit()
        throw std::runtime_error("SDL failed initialization!\n");
        return false;
     }
-    if (SDL_CreateWindowAndRenderer(m_WindowWidth, m_WindowHeight, 0, &m_Window, &m_Renderer) != 0) {
+    // TODO find SDL flag fullscreen toggle
+    if (SDL_CreateWindowAndRenderer(m_WindowWidth, m_WindowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_BORDERLESS, &m_Window, &m_Renderer) != 0) {
         throw std::runtime_error(SDL_GetError());
         return false;
     }
     SDL_SetWindowTitle(m_Window, "Calculator 3000");
     SDL_SetWindowPosition(m_Window, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+
     if (TTF_Init() == -1) {
         throw std::runtime_error(TTF_GetError());
         return false;
