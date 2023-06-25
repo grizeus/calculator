@@ -24,6 +24,8 @@ include_directories(${SDL2_TTF_INCLUDE_DIRS})
 find_package(SDL2_image REQUIRED)
 include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
 
+set(CMAKE_BUILD_TYPE Debug)
+
 # include your header files
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 # Add your source files
