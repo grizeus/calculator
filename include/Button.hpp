@@ -9,7 +9,7 @@ enum InputCode {
     Clear, ClearEntry, Period, PlusMinus, Equal, Backspace
 };
 
-class Button : public UI_Element {
+class Button {
 public:
     Button() = default;
     Button(Coordinate, ToolsPtr, const std::string&, InputCode);
@@ -24,9 +24,11 @@ public:
     void SetHover(bool);
 
     bool GetHover() const;
+    std::shared_ptr<UI_Element> GetElement() const;
     InputCode GetCode() const;
     std::string GetSymbol() const;
 private:
+    std::shared_ptr<UI_Element> m_UI_Element;
     std::string m_Symbol;
     InputCode m_Code;
     bool m_IsHover;

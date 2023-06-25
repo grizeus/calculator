@@ -1,9 +1,11 @@
 #pragma once
 #include "UI_Element.hpp"
 
-class Display : public UI_Element {
+class Display {
 public:
     Display(ToolsPtr drawer);
     ~Display() { }
-    bool Draw(const std::string&) override;
+    void Draw(const std::string&);
+private:
+    std::shared_ptr<UI_Element> m_UI_Element;
 };

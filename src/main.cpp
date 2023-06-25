@@ -18,14 +18,14 @@ int main(int argc, char** argv) {
     calculator.SetDisplay(std::make_shared<Display>(display));
     display.Draw("0");
     for (int i = 0; i < buttons.GetButtons().size(); ++i)
-        buttons.GetButtons()[i].Draw("");
+        buttons.GetButtons()[i].Draw();
     // buttons.GetButtons()[0].Draw("YO");
     // buttons.GetButtons()[1].Draw("YO");
     // buttons.GetButtons()[2].Draw("YO");
     // buttons.GetButtons()[3].Draw("YO");
     while (true) {
         for (int i = 0; i < buttons.GetButtons().size(); ++i)
-            buttons.GetButtons()[i].Draw("");
+            buttons.GetButtons()[i].Draw();
         InputCode input = buttons.CheckInput();
         calculator.Processing(input);
         calculator.DisplayResult();

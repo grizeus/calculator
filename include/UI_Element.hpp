@@ -31,11 +31,8 @@ public:
         return SDLColor;
     }
 
-    UI_Element() = default;
     UI_Element(ToolsPtr);
     virtual ~UI_Element() { }
-
-    virtual void Draw(const std::string&) = 0;
 
     int GetHeight() const{ return m_Height; }
     int GetWidth() const { return m_Width; }

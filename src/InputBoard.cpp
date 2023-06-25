@@ -30,7 +30,7 @@ InputCode InputBoard::CheckInput(){
             switch (e.type) {
             case SDL_MOUSEMOTION:
                 for (int i = 0; i < 24; ++i) {
-                    if ((e.button.x <= m_Buttons[i].GetPosition().first + m_Buttons[i].GetWidth()) && (e.button.y <= m_Buttons[i].GetPosition().second + m_Buttons[i].GetHeight()))
+                    if ((e.button.x <= m_Buttons[i].GetElement()->GetPosition().first + m_Buttons[i].GetElement()->GetWidth()) && (e.button.y <= m_Buttons[i].GetElement()->GetPosition().second + m_Buttons[i].GetElement()->GetHeight()))
                         m_Buttons[i].SetHover(true);
                     else
                         m_Buttons[i].SetHover(false);
