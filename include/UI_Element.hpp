@@ -11,8 +11,7 @@ using ToolsPtr = std::shared_ptr<SDL_Tools>;
 
 class UI_Element {
 public:
-    struct Color
-    {
+    struct Color {
     Color() = default;
     Color(uint8_t r, uint8_t g, uint8_t b, uint8_t a)
         : red(r), green(g), blue(b), alpha(a) {}
@@ -36,8 +35,7 @@ public:
     UI_Element(ToolsPtr);
     virtual ~UI_Element() { }
 
-    virtual bool Draw(const std::string&) = 0;
-    virtual void Hover(bool) = 0;
+    virtual void Draw(const std::string&) = 0;
 
     int GetHeight() const{ return m_Height; }
     int GetWidth() const { return m_Width; }

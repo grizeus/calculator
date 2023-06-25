@@ -12,7 +12,7 @@ InputBoard::InputBoard(ToolsPtr drawer)
 
     for (int i = 0; i < 6; ++i) {
         for (int j = 0; j < 4; ++j) {
-            Coordinate coord = std::make_pair(static_cast<float>(30.0 + 100 * j), static_cast<float>(440.0 - 50 * i));
+            Coordinate coord = std::make_pair(static_cast<float>(4.0 + 127 * j), static_cast<float>(440.0 - 65 * i));
             AddButton(coord, Symbols[j + i * 4], static_cast<InputCode>(j + i * 4 + 1), (j + i * 4));
         }
     }

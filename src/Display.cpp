@@ -4,13 +4,13 @@
 Display::Display(ToolsPtr drawer)
     : UI_Element(drawer) 
 {
-    SetHeight(45);
+    SetHeight(100);
     SetWidth(497);
     SetPosition(0.0f, 0.0f);
     SetBackgroundColor(0xCF, 0xCF, 0xCF, 0xCF);
     SetBorderColor( 0xCF, 0xCF, 0xCF, 0xFF);
     SetHoverColor (0xCF, 0xCF, 0xCF, 0xCF);
-    SetContentColor (0xFF, 0x00, 0x00, 0xFF); // black
+    SetContentColor(0x1E, 0x90, 0xFF, 0xCF); // dodger blue
 }
 
 bool Display::Draw(const std::string& content) {
@@ -37,9 +37,6 @@ bool Display::Draw(const std::string& content) {
     SDL_RenderPresent(renderer);
     return true;
 }
-
-void Display::Hover(bool)
-{ /* stub */ }
 
 // uint32_t color = 0xFF;
 // color = color << 8;

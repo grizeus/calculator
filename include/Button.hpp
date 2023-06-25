@@ -16,8 +16,9 @@ public:
 
     ~Button() { }
 
-    void Hover(bool) override;
-    bool Draw(const std::string&) override;
+    void Hover() ;
+    void Draw();
+    void FinalDraw();
     InputCode Click();
 
     void SetHover(bool);

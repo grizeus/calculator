@@ -1,7 +1,5 @@
 .vscode
 build
-media 
+media
 .cal*
-.cache/*
-.cache/clangd/*
-.git
+.cache/clangd/index/*
