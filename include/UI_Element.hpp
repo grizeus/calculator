@@ -30,9 +30,9 @@ public:
         SDLColor.a = c.alpha;
         return SDLColor;
     }
-
+    UI_Element() = default;
     UI_Element(ToolsPtr);
-    virtual ~UI_Element() { }
+    ~UI_Element() { }
 
     int GetHeight() const{ return m_Height; }
     int GetWidth() const { return m_Width; }
