@@ -1,3 +1,4 @@
+#include <exception>
 #include <iostream>
 #include "../include/Calculator.hpp"
 #include "../include/Button.hpp"
@@ -5,6 +6,7 @@
 #include "../include/InputBoard.hpp"
 #include "../include/UI_Element.hpp"
 #include "../include/SDL_Tools.hpp"
+#include "SDL_render.h"
 
 int main(int argc, char** argv) {
     ToolsPtr tool(new SDL_Tools());
@@ -18,14 +20,26 @@ int main(int argc, char** argv) {
     // calculator.SetDisplay(std::make_shared<Display>(display));
     calculator.DisplayResult();
     // display.Draw(" ");
+    // iterators
     for (int i = 0; i < buttons.GetButtons().size(); ++i)
-        buttons.GetButtons()[i].FinalDraw();
+        buttons.GetButtons()[i].Draw(false);
+    SDL_RenderPresent(tool->m_Renderer);
+
     while (true) {
-        for (int i = 0; i < buttons.GetButtons().size(); ++i)
-            buttons.GetButtons()[i].FinalDraw();
+
+        // for (int i = 0; i < buttons.GetButtons().size(); ++i)
+            // buttons.GetButtons()[i].FinalDraw();
+    
         InputCode input = buttons.CheckInput();
         calculator.Processing(input);
+
+    try {
         calculator.DisplayResult();
+    SDL_RenderPresent(tool->m_Renderer);
+    }catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
     }
     return 0;
+    
 }

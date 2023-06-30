@@ -31,10 +31,11 @@ void Button::Hover() {
         throw std::runtime_error(TTF_GetError());
     SDL_RenderCopy(renderer, TextTexture, nullptr, &ButtonRect);
 
-    SDL_RenderPresent(renderer);
 }
 
-void Button::Draw() {
+void Button::Draw(bool hover) {
+    if (hover)
+        SetBackgroundColor(red);
     SDL_Renderer* renderer = GetTools()->m_Renderer; 
     SDL_Rect ButtonRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()}; 
     SDL_SetRenderDrawColor(renderer, GetBackgroundColor().red, GetBackgroundColor().green, GetBackgroundColor().blue, GetBackgroundColor().alpha);
@@ -49,7 +50,6 @@ void Button::Draw() {
         throw std::runtime_error(TTF_GetError());
     SDL_RenderCopy(renderer, TextTexture, nullptr, &ButtonRect);
     
-    SDL_RenderPresent(renderer);
 }
 
 void Button::FinalDraw() {

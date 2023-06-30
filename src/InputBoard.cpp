@@ -29,7 +29,7 @@ InputCode InputBoard::CheckInput(){
     SDL_Event e;
     bool quit = false;
     while (quit == false) {
-        while (SDL_WaitEvent(&e)) {
+            SDL_WaitEvent(&e);
             switch (e.type) {
             case SDL_MOUSEMOTION:
                 for (int i = 0; i < 24; ++i) {
@@ -38,10 +38,13 @@ InputCode InputBoard::CheckInput(){
                         && (e.button.y <= (m_Buttons[i].GetElement().GetPosition().second + m_Buttons[i].GetElement().GetHeight()))
                         && (e.button.y >= m_Buttons[i].GetElement().GetPosition().second))
                     {
-                        m_Buttons[i].SetHover(true);
+                        m_Buttons[i].Draw(true);
+                        return Unsoecify;
                     }
-                    else
-                        m_Buttons[i].SetHover(false);
+                    else {
+                        m_Buttons[i].Draw(false);
+                        return Unspecify;
+                    }
                 // std::cout << e.button.x << " " << e.button.y << "\n"; // for debug
                 }
                 break;
@@ -100,8 +103,7 @@ InputCode InputBoard::CheckInput(){
                 break;
             }
         }
-    }
-    return None;
+    return None; // change Unspecify
 }
 
 std::array<Button, 24> InputBoard::GetButtons() const { return m_Buttons; }

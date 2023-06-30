@@ -6,7 +6,7 @@
 
 enum class State {
     WaitForOperand1,
-    WaitForOperator,
+    // WaitForOperator,
     WaitForOperand2,
 };
 
@@ -17,6 +17,7 @@ public:
 
     void DisplayResult();
     // void SetDisplay(std::shared_ptr<Display>);
+    void HandleOperator();
     void Processing(InputCode input);
 
     double Compute(const std::string&, const std::string&);

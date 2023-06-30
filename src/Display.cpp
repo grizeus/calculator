@@ -29,7 +29,6 @@ void Display::Draw(const std::string& content) {
     
     SDL_RenderCopy(renderer, TextTexture, nullptr, &DisplayRect);
     
-    SDL_RenderPresent(renderer);
 }
 
 void Display::SetWidth(int width) { m_UI_Element.SetWidth(width); }
