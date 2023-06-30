@@ -16,27 +16,13 @@ Button::Button(Coordinate pos, ToolsPtr drawer, const std::string &symbol, Input
     m_IsHover = false;
 }
 
-void Button::Hover() {
-    SDL_Renderer* renderer = GetTools()->m_Renderer;
-    SDL_Rect ButtonRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()}; 
-    SDL_SetRenderDrawColor(renderer, GetHoverColor().red, GetHoverColor().green, GetHoverColor().blue, GetHoverColor().alpha);
-    SDL_RenderFillRect(renderer, &ButtonRect);
-    SDL_Surface* TextSurface = TTF_RenderUTF8_Solid(GetTools()->m_Font, m_Symbol.c_str(), m_UI_Element.ConvertToSDLColor(GetContentColor()));
-    if (TextSurface == nullptr)
-        throw std::runtime_error(SDL_GetError());
-
-    SDL_Texture* TextTexture = SDL_CreateTextureFromSurface(renderer, TextSurface);
-    SDL_FreeSurface(TextSurface);
-    if (TextTexture == nullptr)
-        throw std::runtime_error(TTF_GetError());
-    SDL_RenderCopy(renderer, TextTexture, nullptr, &ButtonRect);
-
-}
-
-void Button::Draw(bool hover) {
-    if (hover)
-        SetBackgroundColor(red);
+void Button::Draw() {
     SDL_Renderer* renderer = GetTools()->m_Renderer; 
+    if (m_IsHover)
+        SDL_SetRenderDrawColor(renderer, GetHoverColor().red, GetHoverColor().green, GetHoverColor().blue, GetHoverColor().alpha);
+    else
+        SDL_SetRenderDrawColor(renderer, GetBackgroundColor().red, GetBackgroundColor().green, GetBackgroundColor().blue, GetBackgroundColor().alpha);
+
     SDL_Rect ButtonRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()}; 
     SDL_SetRenderDrawColor(renderer, GetBackgroundColor().red, GetBackgroundColor().green, GetBackgroundColor().blue, GetBackgroundColor().alpha);
     SDL_RenderFillRect(renderer, &ButtonRect);
@@ -52,13 +38,6 @@ void Button::Draw(bool hover) {
     
 }
 
-void Button::FinalDraw() {
-    if (m_IsHover)
-        Hover();
-    else
-        Draw();
-}
-
 InputCode Button::Click() {
     SDL_Event e;
     while (SDL_WaitEvent(&e)) {
@@ -72,10 +51,10 @@ InputCode Button::Click() {
             }
             break;
         default:
-            return None;
+            return Unspecify;
         }
     }
-    return None;
+    return Unspecify;
 }
 
 void Button::SetHover(bool hover) { m_IsHover = hover; }

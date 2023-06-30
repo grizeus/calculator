@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     // display.Draw(" ");
     // iterators
     for (int i = 0; i < buttons.GetButtons().size(); ++i)
-        buttons.GetButtons()[i].Draw(false);
+        buttons.GetButtons()[i].Draw();
     SDL_RenderPresent(tool->m_Renderer);
 
     while (true) {

@@ -3,7 +3,7 @@
 #include "UI_Element.hpp"
 
 enum InputCode {
-    None = 0,
+    Unspecify = 0,
     Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine,
     Plus, Minus, Asterisk, Slash, Percent, Inverse, Square, SquareRoot,
     Clear, ClearEntry, Period, PlusMinus, Equal, Backspace
@@ -16,9 +16,7 @@ public:
 
     ~Button() { }
 
-    void Hover() ;
     void Draw();
-    void FinalDraw();
     InputCode Click();
 
     void SetHover(bool);

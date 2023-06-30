@@ -1,4 +1,5 @@
 #include "../include/InputBoard.hpp"
+#include "Button.hpp"
 #include <iostream>
 
 InputBoard::InputBoard(ToolsPtr drawer)
@@ -38,13 +39,10 @@ InputCode InputBoard::CheckInput(){
                         && (e.button.y <= (m_Buttons[i].GetElement().GetPosition().second + m_Buttons[i].GetElement().GetHeight()))
                         && (e.button.y >= m_Buttons[i].GetElement().GetPosition().second))
                     {
-                        m_Buttons[i].Draw(true);
-                        return Unsoecify;
-                    }
-                    else {
-                        m_Buttons[i].Draw(false);
+                        m_Buttons[i].SetHover(true);
                         return Unspecify;
                     }
+                    m_Buttons[i].Draw();
                 // std::cout << e.button.x << " " << e.button.y << "\n"; // for debug
                 }
                 break;
@@ -94,16 +92,16 @@ InputCode InputBoard::CheckInput(){
                 case SDLK_BACKSPACE:
                     return Backspace;
                 default:
-                    return None;
+                    return Unspecify;
                 }
             case SDL_QUIT:
                 quit = true;
             default:
-                return None;
+                return Unspecify;
                 break;
             }
         }
-    return None; // change Unspecify
+    return Unspecify;
 }
 
 std::array<Button, 24> InputBoard::GetButtons() const { return m_Buttons; }
