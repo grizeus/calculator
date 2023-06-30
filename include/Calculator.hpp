@@ -12,11 +12,11 @@ enum class State {
 
 class Calculator {
 public:
-    Calculator();
+    Calculator(ToolsPtr drawer);
     ~Calculator() { }
 
     void DisplayResult();
-    void SetDisplay(std::shared_ptr<Display>);
+    // void SetDisplay(std::shared_ptr<Display>);
     void Processing(InputCode input);
 
     double Compute(const std::string&, const std::string&);
@@ -28,7 +28,7 @@ private:
     unsigned char m_Op;
     bool HasPeriodTyped = false;
     bool IsNegative = false;
-    std::shared_ptr<Display> m_Display;
+    Display m_Display;
     std::map<InputCode, std::string> InputCodeMap = {
         {Zero, "0"},
         {One, "1"},

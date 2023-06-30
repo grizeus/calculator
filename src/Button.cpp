@@ -21,9 +21,7 @@ void Button::Hover() {
     SDL_Rect ButtonRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()}; 
     SDL_SetRenderDrawColor(renderer, GetHoverColor().red, GetHoverColor().green, GetHoverColor().blue, GetHoverColor().alpha);
     SDL_RenderFillRect(renderer, &ButtonRect);
-    // SDL_Surface* TextSurface = TTF_RenderUTF8_Solid(GetTools()->m_Font, m_Symbol.c_str(), ConvertToSDLColor(GetContentColor()));
-    // SDL_Surface* TextSurface = TTF_RenderUNICODE_Solid(GetTools()->m_Font, 10, ConvertToSDLColor(GetContentColor())); 
-    SDL_Surface* TextSurface = TTF_RenderText_Solid(GetTools()->m_Font, m_Symbol.c_str(), m_UI_Element.ConvertToSDLColor(GetContentColor()));
+    SDL_Surface* TextSurface = TTF_RenderUTF8_Solid(GetTools()->m_Font, m_Symbol.c_str(), m_UI_Element.ConvertToSDLColor(GetContentColor()));
     if (TextSurface == nullptr)
         throw std::runtime_error(SDL_GetError());
 
@@ -66,8 +64,12 @@ InputCode Button::Click() {
     while (SDL_WaitEvent(&e)) {
         switch (e.type) {
         case SDL_MOUSEBUTTONUP:
-            if ((e.button.x <=GetPosition().first + GetWidth()) && (e.button.y <= GetPosition().second + GetHeight()))
+            if ((e.button.x <= (GetPosition().first + GetWidth()))
+                && (e.button.x >= GetPosition().first) 
+                && (e.button.y <= (GetPosition().second + GetHeight()))
+                && (e.button.y >= GetPosition().second)) {
                 return m_Code;
+            }
             break;
         default:
             return None;

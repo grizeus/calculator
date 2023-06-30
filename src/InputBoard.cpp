@@ -5,9 +5,12 @@ InputBoard::InputBoard(ToolsPtr drawer)
     : m_Drawer(drawer) 
 {
     const std::array<std::string, 24> Symbols = {
-        "0","1","2","3","4","5","6","7","8","9",
-        "+","-","X", "÷","%","⅟x","x²","√",
-        "C","CE",".","±","=","⌫"
+        "±","0",".","=",
+        "1","2","3","+",
+        "4","5","6","-",
+        "7","8","9","X",
+        "⅟x","x²","√","÷",
+        "%","CE","C","⌫"
     };
 
     for (int i = 0; i < 6; ++i) {
@@ -30,11 +33,16 @@ InputCode InputBoard::CheckInput(){
             switch (e.type) {
             case SDL_MOUSEMOTION:
                 for (int i = 0; i < 24; ++i) {
-                    if ((e.button.x <= m_Buttons[i].GetElement().GetPosition().first + m_Buttons[i].GetElement().GetWidth()) && (e.button.y <= m_Buttons[i].GetElement().GetPosition().second + m_Buttons[i].GetElement().GetHeight()))
+                    if ((e.button.x <= (m_Buttons[i].GetElement().GetPosition().first + m_Buttons[i].GetElement().GetWidth()))
+                        && (e.button.x >= m_Buttons[i].GetElement().GetPosition().first)
+                        && (e.button.y <= (m_Buttons[i].GetElement().GetPosition().second + m_Buttons[i].GetElement().GetHeight()))
+                        && (e.button.y >= m_Buttons[i].GetElement().GetPosition().second))
+                    {
                         m_Buttons[i].SetHover(true);
+                    }
                     else
                         m_Buttons[i].SetHover(false);
-                std::cout << e.button.x << " " << e.button.y << "\n"; // for debug
+                // std::cout << e.button.x << " " << e.button.y << "\n"; // for debug
                 }
                 break;
             case SDL_MOUSEBUTTONUP:

@@ -12,20 +12,17 @@ int main(int argc, char** argv) {
         std::cout << "Initialization failed" << std::endl;
         return 1;
     }
-    Calculator calculator;
+    Calculator calculator(tool);
     InputBoard buttons(tool);
-    Display display(tool);
-    calculator.SetDisplay(std::make_shared<Display>(display));
-    display.Draw("0");
+    // Display display(tool);
+    // calculator.SetDisplay(std::make_shared<Display>(display));
+    calculator.DisplayResult();
+    // display.Draw(" ");
     for (int i = 0; i < buttons.GetButtons().size(); ++i)
-        buttons.GetButtons()[i].Draw();
-    // buttons.GetButtons()[0].Draw("YO");
-    // buttons.GetButtons()[1].Draw("YO");
-    // buttons.GetButtons()[2].Draw("YO");
-    // buttons.GetButtons()[3].Draw("YO");
+        buttons.GetButtons()[i].FinalDraw();
     while (true) {
         for (int i = 0; i < buttons.GetButtons().size(); ++i)
-            buttons.GetButtons()[i].Draw();
+            buttons.GetButtons()[i].FinalDraw();
         InputCode input = buttons.CheckInput();
         calculator.Processing(input);
         calculator.DisplayResult();

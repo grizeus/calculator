@@ -1,16 +1,34 @@
 #include "../include/Calculator.hpp"
+#include "UI_Element.hpp"
 #include <iostream>
 
-Calculator::Calculator()
+Calculator::Calculator(ToolsPtr drawer)
     : m_CurrentState(State::WaitForOperand1)
-{ }
-
-void Calculator::SetDisplay(std::shared_ptr<Display> display) {
-    m_Display = display;
+    , m_Display(drawer)
+    , m_Op(0)
+{
 }
 
+// void Calculator::SetDisplay(std::shared_ptr<Display> display) {
+//     m_Display = display;
+// }
+
 void Calculator::DisplayResult() {
-    m_Display->Draw("RESULT");
+    if (m_CurrentState == State::WaitForOperand1) {
+        if (m_Operand1.empty())
+            std::cout << "0" << std::endl;
+            // m_Display.Draw("0");
+        else
+            std::cout << m_Operand1 << std::endl;
+            // m_Display.Draw(m_Operand1);
+    }
+    else if (m_CurrentState == State::WaitForOperator)
+        std::cout << m_Operand1 << std::endl;
+        // m_Display.Draw(m_Operand1); 
+    else if (m_CurrentState == State::WaitForOperand2)
+        std::cout << m_Operand2 << std::endl;
+        // m_Display.Draw(m_Operand2);
+    // m_Display.Draw("RESULT");
 }
 
 void Calculator::Processing(InputCode input) {
@@ -19,12 +37,13 @@ void Calculator::Processing(InputCode input) {
             if (input == Zero || input == One || input == Two || input == Three || input == Four || input == Five || input == Six
                                                                             || input == Seven || input == Eight || input == Nine) {
                 m_Operand1 += InputCodeMap[input];
+                m_Operand1 = "69";
             }
             else if (input == Period && !HasPeriodTyped) {
                 m_Operand1 += InputCodeMap[input];
                 HasPeriodTyped = true;
             }
-            else if (input == PlusMinus) {
+        else if (input == PlusMinus) {
                 if (!IsNegative) {
                     m_Operand1 = "-" + m_Operand1;
                     IsNegative = true;
@@ -133,7 +152,7 @@ double Calculator::Compute(const std::string& str) {
         case 's':
             result = std::stod(str) * std::stod(m_Operand1);
         case 'r':
-            result = sqrt(std::stod(str));
+            result = std::sqrt(std::stod(str));
         case 'i':
             result = 1 / std::stod(str);
     }
