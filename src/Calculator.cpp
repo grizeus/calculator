@@ -13,6 +13,7 @@ namespace {
             return (input == Plus || input == Minus || input == Asterisk || input == Slash) ? true : false;
     }
 }
+
 Calculator::Calculator(ToolsPtr drawer)
     : m_CurrentState(State::WaitForOperand1)
     , m_Display(drawer)
@@ -21,6 +22,7 @@ Calculator::Calculator(ToolsPtr drawer)
 }
 // TODO write method
 void Calculator::HandleOperator() {
+
 // case State::WaitForOperator:
 //             if (input == Plus || input == Minus || input == Asterisk || input == Slash) {
 //                 HasPeriodTyped = false;
@@ -38,10 +40,6 @@ void Calculator::HandleOperator() {
 //             }
 //             break;
 }
-
-// void Calculator::SetDisplay(std::shared_ptr<Display> display) {
-//     m_Display = display;
-// }
 
 void Calculator::DisplayResult() {
     if (m_CurrentState == State::WaitForOperand1) {
