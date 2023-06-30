@@ -16,29 +16,20 @@ int main(int argc, char** argv) {
     }
     Calculator calculator(tool);
     InputBoard buttons(tool);
-    // Display display(tool);
-    // calculator.SetDisplay(std::make_shared<Display>(display));
     calculator.DisplayResult();
-    // display.Draw(" ");
-    // iterators
-    for (int i = 0; i < buttons.GetButtons().size(); ++i)
-        buttons.GetButtons()[i].Draw();
+    for (auto &button : buttons.GetButtons())
+        button.Draw();
     SDL_RenderPresent(tool->m_Renderer);
 
     while (true) {
-
-        // for (int i = 0; i < buttons.GetButtons().size(); ++i)
-            // buttons.GetButtons()[i].FinalDraw();
-    
         InputCode input = buttons.CheckInput();
         calculator.Processing(input);
-
-    try {
-        calculator.DisplayResult();
-    SDL_RenderPresent(tool->m_Renderer);
-    }catch (const std::exception& e) {
-        std::cout << e.what() << std::endl;
-    }
+        try {
+            calculator.DisplayResult();
+            SDL_RenderPresent(tool->m_Renderer);
+        }catch (const std::exception& e) {
+            std::cout << e.what() << std::endl;
+        }
     }
     return 0;
     

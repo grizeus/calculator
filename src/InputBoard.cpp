@@ -33,23 +33,22 @@ InputCode InputBoard::CheckInput(){
             SDL_WaitEvent(&e);
             switch (e.type) {
             case SDL_MOUSEMOTION:
-                for (int i = 0; i < 24; ++i) {
-                    if ((e.button.x <= (m_Buttons[i].GetElement().GetPosition().first + m_Buttons[i].GetElement().GetWidth()))
-                        && (e.button.x >= m_Buttons[i].GetElement().GetPosition().first)
-                        && (e.button.y <= (m_Buttons[i].GetElement().GetPosition().second + m_Buttons[i].GetElement().GetHeight()))
-                        && (e.button.y >= m_Buttons[i].GetElement().GetPosition().second))
+                for (auto &button : m_Buttons) {
+                    if ((e.button.x <= (button.GetElement().GetPosition().first + button.GetElement().GetWidth()))
+                        && (e.button.x >= button.GetElement().GetPosition().first)
+                        && (e.button.y <= (button.GetElement().GetPosition().second + button.GetElement().GetHeight()))
+                        && (e.button.y >= button.GetElement().GetPosition().second))
                     {
-                        m_Buttons[i].SetHover(true);
+                        button.SetHover(true);
                         return Unspecify;
                     }
-                    m_Buttons[i].Draw();
-                // std::cout << e.button.x << " " << e.button.y << "\n"; // for debug
+                    button.Draw();
                 }
                 break;
             case SDL_MOUSEBUTTONUP:
-                for (int i = 0; i < 24; ++i) {
-                    if (m_Buttons[i].GetHover())
-                        return m_Buttons[i].Click();
+                for (auto &button : m_Buttons) {
+                    if (button.GetHover())
+                        return button.Click();
                 }
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym) {

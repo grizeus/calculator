@@ -28,7 +28,6 @@ void Display::Draw(const std::string& content) {
         throw std::runtime_error(TTF_GetError());
     
     SDL_RenderCopy(renderer, TextTexture, nullptr, &DisplayRect);
-    
 }
 
 void Display::SetWidth(int width) { m_UI_Element.SetWidth(width); }
