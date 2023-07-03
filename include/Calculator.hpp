@@ -1,12 +1,15 @@
 #pragma once
+#include "SDL_Tools.hpp"
+#include "Operand.hpp"
 #include "Button.hpp"
 #include "Display.hpp"
 #include "InputBoard.hpp"
 #include <map>
+#include <string>
+#include <memory>
 
 enum class State {
     WaitForOperand1,
-    // WaitForOperator,
     WaitForOperand2,
 };
 
@@ -16,19 +19,15 @@ public:
     ~Calculator() { }
 
     void DisplayResult();
-    // void SetDisplay(std::shared_ptr<Display>);
-    void HandleOperator();
     void Processing(InputCode input);
 
     double Compute(const std::string&, const std::string&);
     double Compute(const std::string&);
 private:
     State m_CurrentState;
-    std::string m_Operand1;
-    std::string m_Operand2;
+    Operand m_Operand1;
+    Operand m_Operand2;
     unsigned char m_Op;
-    bool HasPeriodTyped = false;
-    bool IsNegative = false;
     Display m_Display;
     std::map<InputCode, std::string> InputCodeMap = {
         {Zero, "0"},

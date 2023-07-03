@@ -17,7 +17,7 @@ Button::Button(Coordinate pos, ToolsPtr drawer, const std::string &symbol, Input
 }
 
 void Button::Draw() {
-    SDL_Renderer* renderer = GetTools()->m_Renderer; 
+    SDL_Renderer* renderer = GetTools()->m_Renderer;
     if (m_IsHover)
         SDL_SetRenderDrawColor(renderer, GetHoverColor().red, GetHoverColor().green, GetHoverColor().blue, GetHoverColor().alpha);
     else

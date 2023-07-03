@@ -1,5 +1,4 @@
 #include "../include/InputBoard.hpp"
-#include "Button.hpp"
 #include <iostream>
 
 InputBoard::InputBoard(ToolsPtr drawer)
@@ -42,13 +41,18 @@ InputCode InputBoard::CheckInput(){
                         button.SetHover(true);
                         return Unspecify;
                     }
+                    // else
+                        // button.SetHover(false);
                     button.Draw();
+                    // SDL_Delay(5);
                 }
                 break;
             case SDL_MOUSEBUTTONUP:
                 for (auto &button : m_Buttons) {
-                    if (button.GetHover())
+                    if (button.GetHover()) {
+                        // SDL_Delay(5);
                         return button.Click();
+                    }
                 }
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym) {
@@ -56,6 +60,7 @@ InputCode InputBoard::CheckInput(){
                     return Zero;
                 case SDLK_1:
                     return One;
+                    break;
                 case SDLK_2:
                     return Two;
                 case SDLK_3:

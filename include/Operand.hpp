@@ -4,12 +4,12 @@
 class Operand {
 public:
     Operand();
-    Operand(std::string);
-    Operand(const Operand&);
+    Operand(const std::string&);
     Operand& operator=(const Operand&);
+    Operand& operator+=(std::string);
     ~Operand();
 
-    std::string getOperand() const;
+    std::string& getOperand();
     bool getHasPeriodTyped() const;
     bool getIsNegative() const;
 

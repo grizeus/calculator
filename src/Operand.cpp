@@ -7,17 +7,10 @@ Operand::Operand() {
 }
 
 // maybe delete later
-Operand::Operand(std::string operand) {
-    this->operand = operand;
+Operand::Operand(const std::string& string) {
+    this->operand = string;
     HasPeriodTyped = false;
     IsNegative = false;
-}
-
-// maybe delete later
-Operand::Operand(const Operand& operand) {
-    this->operand = operand.operand;
-    HasPeriodTyped = operand.HasPeriodTyped;
-    IsNegative = operand.IsNegative;
 }
 
 Operand& Operand::operator=(const Operand& operand) {
@@ -27,10 +20,15 @@ Operand& Operand::operator=(const Operand& operand) {
     return *this;
 }
 
+Operand& Operand::operator+=(std::string operand) {
+    this->operand += operand;
+    return *this;
+}
+
 Operand::~Operand()
 { }
 
-std::string Operand::getOperand() const {
+std::string& Operand::getOperand() {
     return operand;
 }
 

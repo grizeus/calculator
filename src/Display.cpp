@@ -14,6 +14,7 @@ Display::Display(ToolsPtr drawer)
 
 void Display::Draw(const std::string& content) {
     SDL_Renderer* renderer = GetTools()->m_Renderer;
+    // SDL_RenderClear(renderer);
     SDL_Rect DisplayRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()};
     SDL_SetRenderDrawColor(renderer, GetBorderColor().red, GetBorderColor().green, GetBorderColor().blue, GetBorderColor().alpha);
     SDL_RenderDrawRect(renderer, &DisplayRect);

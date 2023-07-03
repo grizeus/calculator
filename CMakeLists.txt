@@ -35,3 +35,11 @@ add_executable(${PROJECT_NAME} ${MY_SOURCES})
 # Link SDL2, SDL2_ttf, and SDL2_image libraries
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
+# test setup
+enable_testing()
+
+add_executable(Calculator_ut UT/Calculator.cpp)
+find_package(GTest REQUIRED)
+target_link_libraries(Calculator_ut GTest::gtest_main)
+include(GoogleTest)
+gtest_discover_tests(Calculator_ut)

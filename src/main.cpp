@@ -6,7 +6,6 @@
 #include "../include/InputBoard.hpp"
 #include "../include/UI_Element.hpp"
 #include "../include/SDL_Tools.hpp"
-#include "SDL_render.h"
 
 int main(int argc, char** argv) {
     ToolsPtr tool(new SDL_Tools());
@@ -32,5 +31,4 @@ int main(int argc, char** argv) {
         }
     }
     return 0;
-    
 }
