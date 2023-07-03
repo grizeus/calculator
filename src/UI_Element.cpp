@@ -4,6 +4,12 @@ UI_Element::UI_Element(ToolsPtr drawer)
         : m_Drawer(drawer)
 { }
 
+bool UI_Element::Intersect(float x, float y) {
+    if (x < (m_Position.first + m_Width) && x >= m_Position.first && y < (m_Position.second + m_Height) && y >= m_Position.second)
+        return true;
+    return false;
+}
+
 void UI_Element::SetHeight(int h) { m_Height = h; }
 void UI_Element::SetWidth(int w) { m_Width = w; }
 void UI_Element::SetPosition (float x, float y) { m_Position = std::make_pair(x, y); }

@@ -34,11 +34,13 @@ public:
     UI_Element(ToolsPtr);
     ~UI_Element() { }
 
+    bool Intersect(float, float);
+    // TODO inline functions
     int GetHeight() const{ return m_Height; }
     int GetWidth() const { return m_Width; }
     Coordinate GetPosition() const {return m_Position; } 
     Color GetBackgroundColor() const{ return m_BackgroundColor; }
-    Color GetHoverColor() const { return m_HoverBackgroundColor; }
+    Color IsHoverColor() const { return m_HoverBackgroundColor; }
     Color GetBorderColor() const { return m_BorderColor; }
     Color GetContentColor() const { return m_ContentColor; }
     ToolsPtr GetTools() const { return m_Drawer; }

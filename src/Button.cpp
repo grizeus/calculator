@@ -19,7 +19,7 @@ Button::Button(Coordinate pos, ToolsPtr drawer, const std::string &symbol, Input
 void Button::Draw() {
     SDL_Renderer* renderer = GetTools()->m_Renderer;
     if (m_IsHover)
-        SDL_SetRenderDrawColor(renderer, GetHoverColor().red, GetHoverColor().green, GetHoverColor().blue, GetHoverColor().alpha);
+        SDL_SetRenderDrawColor(renderer, IsHoverColor().red, IsHoverColor().green, IsHoverColor().blue, IsHoverColor().alpha);
     else
         SDL_SetRenderDrawColor(renderer, GetBackgroundColor().red, GetBackgroundColor().green, GetBackgroundColor().blue, GetBackgroundColor().alpha);
 
@@ -58,7 +58,7 @@ InputCode Button::Click() {
 
 void Button::SetHover(bool hover) { m_IsHover = hover; }
 
-bool Button::GetHover() const { return m_IsHover; }
+bool Button::IsHover() const { return m_IsHover; }
 InputCode Button::GetCode() const { return m_Code; }
 std::string Button::GetSymbol() const { return m_Symbol; }
 UI_Element Button::GetElement() const { return m_UI_Element; }

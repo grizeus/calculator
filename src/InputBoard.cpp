@@ -33,27 +33,27 @@ InputCode InputBoard::CheckInput(){
             switch (e.type) {
             case SDL_MOUSEMOTION:
                 for (auto &button : m_Buttons) {
-                    if ((e.button.x <= (button.GetElement().GetPosition().first + button.GetElement().GetWidth()))
-                        && (e.button.x >= button.GetElement().GetPosition().first)
-                        && (e.button.y <= (button.GetElement().GetPosition().second + button.GetElement().GetHeight()))
-                        && (e.button.y >= button.GetElement().GetPosition().second))
+                    if (button.GetElement().Intersect(e.button.x, e.button.y))
                     {
-                        button.SetHover(true);
-                        return Unspecify;
+                        if (!button.IsHover()) {
+                            button.SetHover(true);
+                            return Unspecify;
+                        }
                     }
-                    // else
-                        // button.SetHover(false);
-                    button.Draw();
-                    // SDL_Delay(5);
+                    else {
+                        if (button.IsHover()) {
+                            button.SetHover(false);
+                            return Unspecify;
+                        }
+                    }
                 }
                 break;
-            case SDL_MOUSEBUTTONUP:
+            case SDL_MOUSEBUTTONDOWN:
                 for (auto &button : m_Buttons) {
-                    if (button.GetHover()) {
-                        // SDL_Delay(5);
+                    if (button.GetElement().Intersect(e.button.x, e.button.y))
                         return button.Click();
                     }
-                }
+                break;
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym) {
                 case SDLK_0:

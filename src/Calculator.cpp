@@ -24,6 +24,14 @@ Calculator::Calculator(ToolsPtr drawer)
     , m_Operand2()
 { }
 
+Calculator::Calculator()
+    : m_CurrentState(State::WaitForOperand1)
+    , m_Display()
+    , m_Op(0)
+    , m_Operand1()
+    , m_Operand2()
+{ }
+
 // void Calculator::HandleOperator() {
 //     if (m_Op == 0)
 //         return;

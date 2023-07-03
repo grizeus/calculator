@@ -24,7 +24,10 @@ int main(int argc, char** argv) {
         InputCode input = buttons.CheckInput();
         calculator.Processing(input);
         try {
+            SDL_RenderClear(tool->m_Renderer);
             calculator.DisplayResult();
+            for (auto& button : buttons.GetButtons()) 
+                button.Draw();
             SDL_RenderPresent(tool->m_Renderer);
         }catch (const std::exception& e) {
             std::cout << e.what() << std::endl;

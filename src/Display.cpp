@@ -1,5 +1,15 @@
 #include "../include/Display.hpp"
 
+Display::Display()
+    : m_UI_Element()
+{
+    SetHeight(100);
+    SetWidth(497);
+    SetPosition(0.0f, 0.0f);
+    SetBackgroundColor(0xCF, 0xCF, 0xCF, 0xCF);
+    SetBorderColor( 0xCF, 0xCF, 0xCF, 0xFF);
+    SetContentColor(0x1E, 0x90, 0xFF, 0xCF); // dodger blue
+}
 
 Display::Display(ToolsPtr drawer)
     : m_UI_Element(drawer)
@@ -14,7 +24,6 @@ Display::Display(ToolsPtr drawer)
 
 void Display::Draw(const std::string& content) {
     SDL_Renderer* renderer = GetTools()->m_Renderer;
-    // SDL_RenderClear(renderer);
     SDL_Rect DisplayRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()};
     SDL_SetRenderDrawColor(renderer, GetBorderColor().red, GetBorderColor().green, GetBorderColor().blue, GetBorderColor().alpha);
     SDL_RenderDrawRect(renderer, &DisplayRect);

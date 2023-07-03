@@ -3,6 +3,7 @@
 
 class Display {
 public:
+    Display();
     Display(ToolsPtr drawer);
     ~Display() { }
     void Draw(const std::string&);
@@ -14,7 +15,7 @@ public:
     UI_Element::Color GetBackgroundColor() const { return m_UI_Element.GetBackgroundColor(); }
     UI_Element::Color GetContentColor() const { return m_UI_Element.GetContentColor(); }
     UI_Element::Color GetBorderColor() const { return m_UI_Element.GetBorderColor(); }
-    UI_Element::Color GetHoverColor() const { return m_UI_Element.GetHoverColor(); }
+    UI_Element::Color IsHoverColor() const { return m_UI_Element.IsHoverColor(); }
     ToolsPtr GetTools() const { return m_UI_Element.GetTools(); }
 
     void SetWidth(int);

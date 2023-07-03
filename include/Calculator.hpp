@@ -15,6 +15,7 @@ enum class State {
 
 class Calculator {
 public:
+    Calculator();
     Calculator(ToolsPtr drawer);
     ~Calculator() { }
 

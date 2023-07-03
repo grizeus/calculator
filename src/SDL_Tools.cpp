@@ -8,7 +8,7 @@ bool SDL_Tools::ToolsInit()
        return false;
     }
     // TODO find SDL flag fullscreen toggle
-    if (SDL_CreateWindowAndRenderer(m_WindowWidth, m_WindowHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_BORDERLESS, &m_Window, &m_Renderer) != 0) {
+    if (SDL_CreateWindowAndRenderer(m_WindowWidth, m_WindowHeight, SDL_WINDOW_SHOWN , &m_Window, &m_Renderer) != 0) {
         throw std::runtime_error(SDL_GetError());
         return false;
     }
