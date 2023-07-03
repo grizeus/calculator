@@ -21,7 +21,6 @@ public:
     uint8_t alpha;
     };
 
-// TODO ask about return without copy
     SDL_Color ConvertToSDLColor(const Color& c) {
         SDL_Color SDLColor;
         SDLColor.r = c.red;
@@ -30,20 +29,21 @@ public:
         SDLColor.a = c.alpha;
         return SDLColor;
     }
+
     UI_Element() = default;
     UI_Element(ToolsPtr);
     ~UI_Element() { }
 
     bool Intersect(float, float);
-    // TODO inline functions
-    int GetHeight() const{ return m_Height; }
-    int GetWidth() const { return m_Width; }
-    Coordinate GetPosition() const {return m_Position; } 
-    Color GetBackgroundColor() const{ return m_BackgroundColor; }
-    Color IsHoverColor() const { return m_HoverBackgroundColor; }
-    Color GetBorderColor() const { return m_BorderColor; }
-    Color GetContentColor() const { return m_ContentColor; }
-    ToolsPtr GetTools() const { return m_Drawer; }
+    
+    inline int GetHeight() const{ return m_Height; }
+    inline int GetWidth() const { return m_Width; }
+    inline Coordinate GetPosition() const {return m_Position; } 
+    inline Color GetBackgroundColor() const{ return m_BackgroundColor; }
+    inline Color IsHoverColor() const { return m_HoverBackgroundColor; }
+    inline Color GetBorderColor() const { return m_BorderColor; }
+    inline Color GetContentColor() const { return m_ContentColor; }
+    inline ToolsPtr GetTools() const { return m_Drawer; }
 
     void SetHeight(int);
     void SetWidth(int);
@@ -53,6 +53,7 @@ public:
     void SetBorderColor(uint8_t, uint8_t, uint8_t, uint8_t);
     void SetContentColor(uint8_t, uint8_t, uint8_t, uint8_t);
     void SetTools(ToolsPtr);
+
 private:
     int m_Height;
     int m_Width;

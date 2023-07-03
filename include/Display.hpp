@@ -9,14 +9,14 @@ public:
     void Draw(const std::string&);
 
     // UI_Element's getters and setters
-    int GetWidth() const { return m_UI_Element.GetWidth(); }
-    int GetHeight() const { return m_UI_Element.GetHeight(); }
-    Coordinate GetPosition() const { return m_UI_Element.GetPosition(); }
-    UI_Element::Color GetBackgroundColor() const { return m_UI_Element.GetBackgroundColor(); }
-    UI_Element::Color GetContentColor() const { return m_UI_Element.GetContentColor(); }
-    UI_Element::Color GetBorderColor() const { return m_UI_Element.GetBorderColor(); }
-    UI_Element::Color IsHoverColor() const { return m_UI_Element.IsHoverColor(); }
-    ToolsPtr GetTools() const { return m_UI_Element.GetTools(); }
+    inline int GetWidth() const { return m_UI_Element.GetWidth(); }
+    inline int GetHeight() const { return m_UI_Element.GetHeight(); }
+    inline Coordinate GetPosition() const { return m_UI_Element.GetPosition(); }
+    inline UI_Element::Color GetBackgroundColor() const { return m_UI_Element.GetBackgroundColor(); }
+    inline UI_Element::Color GetContentColor() const { return m_UI_Element.GetContentColor(); }
+    inline UI_Element::Color GetBorderColor() const { return m_UI_Element.GetBorderColor(); }
+    inline UI_Element::Color IsHoverColor() const { return m_UI_Element.IsHoverColor(); }
+    inline ToolsPtr GetTools() const { return m_UI_Element.GetTools(); }
 
     void SetWidth(int);
     void SetHeight(int);
