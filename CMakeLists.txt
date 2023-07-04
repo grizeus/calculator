@@ -1,16 +1,18 @@
 cmake_minimum_required(VERSION 3.22)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/)
-project(CALCULATOR)
+
+set(This calculator)
+project(${This} C CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Set the path to SDL2
 set(SDL2_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dependency/SDL2/")
 
 # Set the path to SDL2_ttf
 set(SDL2_TTF_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dependency/SDL2_ttf/")
-
-# Set the path to SDL2_image
-set(SDL2_IMAGE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/dependency/SDL2_image/")
 
 # Find SDL2
 find_package(SDL2 REQUIRED)
@@ -20,26 +22,37 @@ include_directories(${SDL2_INCLUDE_DIRS})
 find_package(SDL2_ttf REQUIRED)
 include_directories(${SDL2_TTF_INCLUDE_DIRS})
 
-# Find SDL2_image
-find_package(SDL2_image REQUIRED)
-include_directories(${SDL2_IMAGE_INCLUDE_DIRS})
-
+# Debug mode
 set(CMAKE_BUILD_TYPE Debug)
-
-# include your header files
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
-# Add your source files
-file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" )
-add_executable(${PROJECT_NAME} ${MY_SOURCES})
-
-# Link SDL2, SDL2_ttf, and SDL2_image libraries
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_IMAGE_LIBRARIES})
 
 # test setup
 enable_testing()
 
-add_executable(Calculator_ut UT/Calculator.cpp)
-find_package(GTest REQUIRED)
-target_link_libraries(Calculator_ut GTest::gtest_main)
-include(GoogleTest)
-gtest_discover_tests(Calculator_ut)
+add_subdirectory(googletest)
+
+set(Headers
+    "include/Button.hpp"
+    "include/Calculator.hpp"
+    "include/Display.hpp"
+    "include/InputBoard.hpp"
+    "include/Operand.hpp"
+    "include/SDL_Tools.hpp"
+    "include/UI_Element.hpp"
+)
+set(Sources
+    "src/Button.cpp"
+    "src/Calculator.cpp"
+    "src/Display.cpp"
+    "src/InputBoard.cpp"
+    "src/Operand.cpp"
+    "src/SDL_Tools.cpp"
+    "src/UI_Element.cpp"
+    "src/main.cpp"
+)
+
+add_executable(${This} ${Sources} ${Headers})
+
+# Link SDL2
+target_link_libraries(${This} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})
+
+add_subdirectory(UT)
