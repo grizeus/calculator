@@ -50,7 +50,7 @@ set(Sources
     "src/main.cpp"
 )
 
-add_executable(${This} ${Sources} ${Headers})
+add_library(${This} STATIC ${Sources} ${Headers})
 
 # Link SDL2
 target_link_libraries(${This} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})
