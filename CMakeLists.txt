@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.22)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/)
 
 set(This calculator)
+set(lib ${This}_lib)
 project(${This} C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -25,34 +26,30 @@ include_directories(${SDL2_TTF_INCLUDE_DIRS})
 # Debug mode
 set(CMAKE_BUILD_TYPE Debug)
 
-# test setup
+set(Headers
+"include/Button.hpp"
+"include/Calculator.hpp"
+"include/Display.hpp"
+"include/InputBoard.hpp"
+"include/Operand.hpp"
+"include/SDL_Tools.hpp"
+"include/UI_Element.hpp"
+)
+set(Sources
+"src/Button.cpp"
+"src/Calculator.cpp"
+"src/Display.cpp"
+"src/InputBoard.cpp"
+"src/Operand.cpp"
+"src/SDL_Tools.cpp"
+"src/UI_Element.cpp"
+"src/main.cpp"
+)
+add_library(${lib} STATIC ${Sources} ${Headers})
+target_link_libraries(${lib} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})
+# add_executable(${This} ${Sources} lib${lib}.a)
+
 enable_testing()
 
 add_subdirectory(googletest)
-
-set(Headers
-    "include/Button.hpp"
-    "include/Calculator.hpp"
-    "include/Display.hpp"
-    "include/InputBoard.hpp"
-    "include/Operand.hpp"
-    "include/SDL_Tools.hpp"
-    "include/UI_Element.hpp"
-)
-set(Sources
-    "src/Button.cpp"
-    "src/Calculator.cpp"
-    "src/Display.cpp"
-    "src/InputBoard.cpp"
-    "src/Operand.cpp"
-    "src/SDL_Tools.cpp"
-    "src/UI_Element.cpp"
-    "src/main.cpp"
-)
-
-add_library(${This} STATIC ${Sources} ${Headers})
-
-# Link SDL2
-target_link_libraries(${This} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})
-
 add_subdirectory(UT)

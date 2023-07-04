@@ -3,5 +3,4 @@ build
 media
 .cal*
 .cache/clangd/index/*
-UT
 googletest

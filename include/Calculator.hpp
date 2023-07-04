@@ -20,6 +20,14 @@ public:
     ~Calculator() { }
     
     inline void SetOperator(unsigned char op) { m_Op = op; }
+    inline void SetOperand1(const std::string& str) { m_Operand1.data = str; }
+    inline void SetOperand2(const std::string& str) { m_Operand2.data = str; }
+    inline void SetNegative1(bool flag) { m_Operand1.IsNegative = flag; }
+    inline void SetNegative2(bool flag) { m_Operand2.IsNegative = flag; }
+    inline void SetState(State state) { m_CurrentState = state; }
+    inline std::string GetOperand1() const { return m_Operand1.data; }
+    inline std::string GetOperand2() const { return m_Operand2.data; }
+
     void DisplayResult();
     void Processing(InputCode input);
 

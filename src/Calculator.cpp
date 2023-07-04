@@ -71,7 +71,7 @@ void Calculator::Processing(InputCode input) {
             }
             else if (input == PlusMinus) {
                 if (!m_Operand1.IsNegative) {
-                    m_Operand1.data += "-" ;
+                    m_Operand1.data = "-" + m_Operand1.data;
                     m_Operand1.IsNegative= true;
                 }
                 else {
@@ -110,7 +110,7 @@ void Calculator::Processing(InputCode input) {
                     m_CurrentState = State::WaitForOperand1;
                 }   
             }
-            else if (IsBinOperator(input)){
+            else if (IsBinOperator(input)) {
                 m_Op = InputCodeMap[input][0];
                 m_CurrentState = State::WaitForOperand2;
             }
@@ -125,7 +125,7 @@ void Calculator::Processing(InputCode input) {
             }
             else if (input == PlusMinus) {
                 if (!m_Operand2.IsNegative) {
-                    m_Operand2.data += "-" ;
+                    m_Operand2.data = "-" + m_Operand2.data;
                     m_Operand2.IsNegative = true;
                 }
                 else {
