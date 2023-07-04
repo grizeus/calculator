@@ -186,12 +186,16 @@ double Calculator::Compute(const std::string& str1, const std::string& str2) {
     switch (m_Op) {
         case '+':
             result = std::stod(str1) + std::stod(str2);
+            break;
         case '-':
             result = std::stod(str1) - std::stod(str2);
+            break;
         case '*':
             result = std::stod(str1) * std::stod(str2);
+            break;
         case '/':
             result = std::stod(str1) / std::stod(str2);
+            break;
     }
     return result;
 }
@@ -201,12 +205,16 @@ double Calculator::Compute(const std::string& str) {
     switch (m_Op) {
         case '%':
             result = std::stod(str) / 100;
+            break;
         case 's':
             result = std::stod(str) * std::stod(str);
+            break;
         case 'r':
             result = std::sqrt(std::stod(str));
+            break;
         case 'i':
             result = 1 / std::stod(str);
+            break;
     }
     return result;
 }

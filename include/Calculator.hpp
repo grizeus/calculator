@@ -20,7 +20,6 @@ public:
     ~Calculator() { }
     
     inline void SetOperator(unsigned char op) { m_Op = op; }
-
     void DisplayResult();
     void Processing(InputCode input);
 
