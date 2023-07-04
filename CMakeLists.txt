@@ -45,9 +45,11 @@ set(Sources
 "src/UI_Element.cpp"
 "src/main.cpp"
 )
+
+add_executable(${This} ${Sources} ${Headers})
 add_library(${lib} STATIC ${Sources} ${Headers})
-target_link_libraries(${lib} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES})
-# add_executable(${This} ${Sources} lib${lib}.a)
+target_link_libraries(${This} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES}) # Link the SDL2 libraries to the executable
+target_link_libraries(${lib} ${SDL2_LIBRARIES} ${SDL2_TTF_LIBRARIES}) # Link the SDL2 libraries to the static library
 
 enable_testing()
 
