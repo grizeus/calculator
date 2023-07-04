@@ -32,62 +32,29 @@ Calculator::Calculator()
     , m_Operand2()
 { }
 
-// void Calculator::HandleOperator() {
-//     if (m_Op == 0)
-//         return;
-//     switch (m_Op) {
-//         case '+':
-//             m_Operand1 = std::to_string(Compute(m_Operand1.getOperand(), m_Operand2.getOperand()));
-//             break;
-//         case '-':
-//             m_Operand1 = std::to_string(Compute(m_Operand1.getOperand(), m_Operand2.getOperand()));
-//             break;
-//         case '*':
-//             m_Operand1 = std::to_string(Compute(m_Operand1.getOperand(), m_Operand2.getOperand()));
-//             break;
-//         case '/':
-//             m_Operand1 = std::to_string(Compute(m_Operand1.getOperand(), m_Operand2.getOperand()));
-//             break;
-//         case '%':
-//             m_Operand1 = std::to_string(Compute(m_Operand1.getOperand()));
-//             break;
-//         case 's':
-//             m_Operand1 = std::to_string(Compute(m_Operand1.getOperand()));
-//             break;
-//         case 'r':
-//             m_Operand1 = std::to_string(Compute(m_Operand1.getOperand()));
-//             break;
-//         case 'i':
-//             m_Operand1 = std::to_string(Compute(m_Operand1.getOperand()));
-//             break;
-//         default:
-//             break;
-//     }
-// }
-
 void Calculator::DisplayResult() {
     if (m_CurrentState == State::WaitForOperand1) {
-        if (m_Operand1.getOperand().empty()) {
-            std::cout << "Size op1: " << m_Operand1.getOperand().size() << std::endl;
+        if (m_Operand1.data.empty()) {
+            std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
             std::cout << "0" << std::endl;
             m_Display.Draw("0");
         }
         else {
-            std::cout << "Size op1: " << m_Operand1.getOperand().size() << std::endl;
-            std::cout << m_Operand1.getOperand() << std::endl;
-            m_Display.Draw(m_Operand1.getOperand());
+            std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
+            std::cout << m_Operand1.data << std::endl;
+            m_Display.Draw(m_Operand1.data);
         }
     }
     else {
-        if (m_Operand2.getOperand().empty()) {
-            std::cout << "Size op1: " << m_Operand1.getOperand().size() << std::endl;
+        if (m_Operand2.data.empty()) {
+            std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
             std::cout << "0" << std::endl;
-            m_Display.Draw(m_Operand1.getOperand());
+            m_Display.Draw(m_Operand1.data);
         }
         else {
-            std::cout << "Size op2: " << m_Operand2.getOperand().size() << std::endl;
-            std::cout << m_Operand2.getOperand() << std::endl;
-            m_Display.Draw(m_Operand2.getOperand());
+            std::cout << "Size op2: " << m_Operand2.data.size() << std::endl;
+            std::cout << m_Operand2.data << std::endl;
+            m_Display.Draw(m_Operand2.data);
         }
     }
 }
@@ -98,55 +65,53 @@ void Calculator::Processing(InputCode input) {
         case State::WaitForOperand1:
             if (IsDigit(input))
                 m_Operand1 += InputCodeMap[input];
-            else if (input == Period && !m_Operand1.getHasPeriodTyped()) {
+            else if (input == Period && !m_Operand1.HasPeriodTyped) {
                 m_Operand1 += InputCodeMap[input];
-                m_Operand1.setHasPeriodTyped(true);
+                m_Operand1.HasPeriodTyped = true;
             }
             else if (input == PlusMinus) {
-                if (!m_Operand1.getIsNegative()) {
-                    m_Operand1.getOperand() += "-" ;
-                    m_Operand1.setIsNegative(true);
+                if (!m_Operand1.IsNegative) {
+                    m_Operand1.data += "-" ;
+                    m_Operand1.IsNegative= true;
                 }
                 else {
-                    m_Operand1.getOperand().erase(m_Operand1.getOperand().begin());
-                    m_Operand1.setIsNegative(false);
+                    m_Operand1.data.erase(m_Operand1.data.begin());
+                    m_Operand1.IsNegative = false;
                 }
             }
             else if (input == ClearEntry) {
-                m_Operand1.getOperand().clear();
+                m_Operand1.data.clear();
             }
             else if (input == Clear) {
-                m_Operand1.getOperand().clear();
-                m_Operand2.getOperand().clear();
+                m_Operand1.data.clear();
+                m_Operand2.data.clear();
             }
             else if (input == Backspace) {
-                if (m_Operand1.getOperand().size() < 2) {
-                    m_Operand1.getOperand().clear();
+                if (m_Operand1.data.size() < 2) {
+                    m_Operand1.data.clear();
                     return;
                 }
-                else if (m_Operand1.getOperand().back() == '.')
-                    m_Operand1.setHasPeriodTyped(false);
-                else if (m_Operand1.getOperand().back() == '-') {
-                    if (m_Operand1.getOperand().size() == 2) {
-                        m_Operand1.getOperand().clear();
+                else if (m_Operand1.data.back() == '.')
+                    m_Operand1.HasPeriodTyped = false;
+                else if (m_Operand1.data.back() == '-') {
+                    if (m_Operand1.data.size() == 2) {
+                        m_Operand1.data.clear();
                         return;
                     }
-                    m_Operand1.setIsNegative(false);
+                    m_Operand1.IsNegative = false;
                 }
-                m_Operand1.getOperand().pop_back();
+                m_Operand1.data.pop_back();
             }
             else if (IsUnOperator(input)) {
                 m_Op = InputCodeMap[input][0];
-                // HandleOperator();
-                m_Operand1 = std::to_string(Compute(m_Operand1.getOperand()));
+                m_Operand1 = std::to_string(Compute(m_Operand1.data));
                 if (IsDigit(input)) {
-                    m_Operand1.getOperand().clear();
+                    m_Operand1.data.clear();
                     m_CurrentState = State::WaitForOperand1;
                 }   
             }
             else if (IsBinOperator(input)){
                 m_Op = InputCodeMap[input][0];
-                // HandleOperator();
                 m_CurrentState = State::WaitForOperand2;
             }
             break;
@@ -154,62 +119,60 @@ void Calculator::Processing(InputCode input) {
         case State::WaitForOperand2:
             if (IsDigit(input))
                 m_Operand2 += InputCodeMap[input];
-            else if (input == Period && !m_Operand2.getHasPeriodTyped()) {
+            else if (input == Period && !m_Operand2.HasPeriodTyped) {
                 m_Operand2 += InputCodeMap[input];
-                m_Operand2.setHasPeriodTyped(true);
+                m_Operand2.HasPeriodTyped = true;
             }
             else if (input == PlusMinus) {
-                if (!m_Operand2.getIsNegative()) {
-                    m_Operand2.getOperand() += "-" ;
-                    m_Operand2.setIsNegative(true);
+                if (!m_Operand2.IsNegative) {
+                    m_Operand2.data += "-" ;
+                    m_Operand2.IsNegative = true;
                 }
                 else {
-                    m_Operand2.getOperand().erase(m_Operand2.getOperand().begin());
-                    m_Operand2.setIsNegative(false);
+                    m_Operand2.data.erase(m_Operand2.data.begin());
+                    m_Operand2.IsNegative = false;
                 }
             }
             else if (input == ClearEntry) {
-                m_Operand2.getOperand().clear();
+                m_Operand2.data.clear();
             }
             else if (input == Clear) {
-                m_Operand1.getOperand().clear();
-                m_Operand2.getOperand().clear();
+                m_Operand1.data.clear();
+                m_Operand2.data.clear();
             }
             else if (input == Backspace) {
-                if (m_Operand2.getOperand().size() < 2) {
-                    m_Operand2.getOperand().clear();
+                if (m_Operand2.data.size() < 2) {
+                    m_Operand2.data.clear();
                     return;
                 }
-                else if (m_Operand2.getOperand().back() == '.')
-                    m_Operand2.setHasPeriodTyped(false);
-                else if (m_Operand2.getOperand().back() == '-') {
-                    if (m_Operand2.getOperand().size() == 2) {
-                        m_Operand2.getOperand().clear();
+                else if (m_Operand2.data.back() == '.')
+                    m_Operand2.HasPeriodTyped = false;
+                else if (m_Operand2.data.back() == '-') {
+                    if (m_Operand2.data.size() == 2) {
+                        m_Operand2.data.clear();
                         return;
                     }
-                    m_Operand2.setIsNegative(false);
+                    m_Operand2.IsNegative = false;
                 }
-                m_Operand2.getOperand().pop_back();
+                m_Operand2.data.pop_back();
             }
             else if (IsUnOperator(input)) {
                 m_Op = InputCodeMap[input][0];
-                // HandleOperator();
-                m_Operand2 = std::to_string(Compute(m_Operand2.getOperand()));
+                m_Operand2 = std::to_string(Compute(m_Operand2.data));
             }
             else if (IsBinOperator(input)) {
                 m_Op = InputCodeMap[input][0];
-                if (!m_Operand2.getOperand().empty()){
-                    m_Operand1 = std::to_string(Compute(m_Operand1.getOperand(), m_Operand2.getOperand()));
+                if (!m_Operand2.data.empty()){
+                    m_Operand1 = std::to_string(Compute(m_Operand1.data, m_Operand2.data));
                 }
-                // HandleOperator();
                 m_CurrentState = State::WaitForOperand2;
             }
             else if (input == Equal) {
-                if (m_Operand2.getOperand().empty()){
+                if (m_Operand2.data.empty()){
                     m_Operand2 = m_Operand1;
                 }
-                m_Operand1 = std::to_string(Compute(m_Operand1.getOperand(), m_Operand2.getOperand()));
-                m_Operand2.getOperand().clear();
+                m_Operand1 = std::to_string(Compute(m_Operand1.data, m_Operand2.data));
+                m_Operand2.data.clear();
                 m_CurrentState = State::WaitForOperand2;
             }
             break;
