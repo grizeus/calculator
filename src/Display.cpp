@@ -31,7 +31,7 @@ void Display::Draw(const std::string& content) {
         index = 1;
     else
         index = content.size();
-    SDL_Rect AdjustR = {static_cast<int>(GetPosition().first + GetWidth() - 12 * index), static_cast<int>(GetPosition().second + GetHeight() - 20), 0, 0};
+    SDL_Rect AdjustR = {static_cast<int>(GetPosition().first + GetWidth() - GetWidth() * 4 / 49 * index), static_cast<int>(GetPosition().second + GetHeight() * 2 / 8 ), 0, 0}; // magics
     TTF_SizeText(font, content.c_str(), &AdjustR.w, &AdjustR.h);
     SDL_SetRenderDrawColor(renderer, GetBorderColor().red, GetBorderColor().green, GetBorderColor().blue, GetBorderColor().alpha);
     SDL_RenderDrawRect(renderer, &DisplayRect);

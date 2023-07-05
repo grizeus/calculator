@@ -19,7 +19,7 @@ bool SDL_Tools::ToolsInit()
         throw std::runtime_error(TTF_GetError());
         return false;
     } 
-    m_Font = TTF_OpenFont("../media/mononoki-Bold.ttf", 20);
+    m_Font = TTF_OpenFont("../media/mononoki-Bold.ttf", 72);
 	if (m_Font == NULL) {
         throw std::runtime_error(TTF_GetError());
         return false;
