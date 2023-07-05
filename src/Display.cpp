@@ -24,11 +24,19 @@ Display::Display(ToolsPtr drawer)
 
 void Display::Draw(const std::string& content) {
     SDL_Renderer* renderer = GetTools()->m_Renderer;
+    TTF_Font* font = GetTools()->m_Font;
     SDL_Rect DisplayRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()};
+    int index;
+    if (content.size() < 2)
+        index = 1;
+    else
+        index = content.size();
+    SDL_Rect AdjustR = {static_cast<int>(GetPosition().first + GetWidth() - 12 * index), static_cast<int>(GetPosition().second + GetHeight() - 20), 0, 0};
+    TTF_SizeText(font, content.c_str(), &AdjustR.w, &AdjustR.h);
     SDL_SetRenderDrawColor(renderer, GetBorderColor().red, GetBorderColor().green, GetBorderColor().blue, GetBorderColor().alpha);
     SDL_RenderDrawRect(renderer, &DisplayRect);
 
-    SDL_Surface* TextSurface = TTF_RenderText_Solid(GetTools()->m_Font, content.c_str(), m_UI_Element.ConvertToSDLColor(GetContentColor()));
+    SDL_Surface* TextSurface = TTF_RenderText_Solid(font, content.c_str(), m_UI_Element.ConvertToSDLColor(GetContentColor()));
     if (TextSurface == nullptr) 
         throw std::runtime_error(SDL_GetError());
 
@@ -37,7 +45,7 @@ void Display::Draw(const std::string& content) {
     if (TextTexture == nullptr)
         throw std::runtime_error(TTF_GetError());
     
-    SDL_RenderCopy(renderer, TextTexture, nullptr, &DisplayRect);
+    SDL_RenderCopy(renderer, TextTexture, nullptr, &AdjustR);
 }
 
 void Display::SetWidth(int width) { m_UI_Element.SetWidth(width); }
