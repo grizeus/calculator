@@ -5,7 +5,8 @@ UI_Element::UI_Element(ToolsPtr drawer)
 { }
 
 bool UI_Element::Intersect(float x, float y) {
-    if (x < (m_Position.first + m_Width) && x >= m_Position.first && y < (m_Position.second + m_Height) && y >= m_Position.second)
+    if (x < (m_Position.first + m_Width) && x > m_Position.first
+        && y < (m_Position.second + m_Height) && y > m_Position.second)
         return true;
     return false;
 }
@@ -18,7 +19,7 @@ void UI_Element::SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) 
 }
 
 void UI_Element::SetHoverColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {
-    m_HoverBackgroundColor.red = r; m_HoverBackgroundColor.green = g; m_HoverBackgroundColor.blue = b; m_HoverBackgroundColor.alpha = a; 
+    m_HoverBackgroundColor.red = r; m_HoverBackgroundColor.green = g; m_HoverBackgroundColor.blue = b; m_HoverBackgroundColor.alpha = a;
 }
 
 void UI_Element::SetBorderColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) {

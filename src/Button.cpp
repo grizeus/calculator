@@ -2,7 +2,6 @@
 #include <SDL2/SDL_ttf.h>
 #include <string>
 
-
 Button::Button(Coordinate pos, ToolsPtr drawer, const std::string &symbol, InputCode code)
         : m_UI_Element(drawer), m_Symbol(symbol), m_Code(code) {
     SetHeight(65);
@@ -19,7 +18,7 @@ Button::Button(Coordinate pos, ToolsPtr drawer, const std::string &symbol, Input
 void Button::Draw() {
     SDL_Renderer* renderer = GetTools()->m_Renderer;
     if (m_IsHover)
-        SDL_SetRenderDrawColor(renderer, IsHoverColor().red, IsHoverColor().green, IsHoverColor().blue, IsHoverColor().alpha);
+        SDL_SetRenderDrawColor(renderer, GetHoverColor().red, GetHoverColor().green, GetHoverColor().blue, GetHoverColor().alpha);
     else
         SDL_SetRenderDrawColor(renderer, GetBackgroundColor().red, GetBackgroundColor().green, GetBackgroundColor().blue, GetBackgroundColor().alpha);
 
@@ -37,37 +36,16 @@ void Button::Draw() {
     
 }
 
-InputCode Button::Click() {
-    SDL_Event e;
-    while (SDL_WaitEvent(&e)) {
-        switch (e.type) {
-        case SDL_MOUSEBUTTONUP:
-            if ((e.button.x <= (GetPosition().first + GetWidth()))
-                && (e.button.x >= GetPosition().first) 
-                && (e.button.y <= (GetPosition().second + GetHeight()))
-                && (e.button.y >= GetPosition().second)) {
-                return m_Code;
-            }
-            break;
-        default:
-            return Unspecify;
-        }
-    }
-    return Unspecify;
-}
-
-void Button::SetHover(bool hover) { m_IsHover = hover; }
-
-bool Button::IsHover() const { return m_IsHover; }
-InputCode Button::GetCode() const { return m_Code; }
-std::string Button::GetSymbol() const { return m_Symbol; }
-UI_Element Button::GetElement() const { return m_UI_Element; }
-
-void Button::SetHeight(int height) { m_UI_Element.SetHeight(height); }
-void Button::SetWidth(int width) { m_UI_Element.SetWidth(width); }
-void Button::SetPosition(float x, float y) { m_UI_Element.SetPosition(x, y); }
-void Button::SetBorderColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetBorderColor(r, g, b, a); }
-void Button::SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetBackgroundColor(r, g, b, a); }
-void Button::SetHoverColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetHoverColor(r, g, b, a); }
-void Button::SetContentColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetContentColor(r, g, b, a); }
-void Button::SetTools(ToolsPtr tools) { m_UI_Element.SetTools(tools); }
+// InputCode Button::Click( SDL_Event e) {
+//     while (SDL_WaitEvent(&e)) {
+//         switch (e.type) {
+//         case SDL_MOUSEBUTTONDOWN:
+//             if (m_UI_Element.Intersect(e.button.x, e.button.y))
+//                 return m_Code;
+//             break;
+//         default:
+//             return Unspecify;
+//         }
+//     }
+//     return Unspecify;
+// }

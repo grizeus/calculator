@@ -40,7 +40,7 @@ public:
     inline int GetWidth() const { return m_Width; }
     inline Coordinate GetPosition() const {return m_Position; } 
     inline Color GetBackgroundColor() const{ return m_BackgroundColor; }
-    inline Color IsHoverColor() const { return m_HoverBackgroundColor; }
+    inline Color GetHoverColor() const { return m_HoverBackgroundColor; }
     inline Color GetBorderColor() const { return m_BorderColor; }
     inline Color GetContentColor() const { return m_ContentColor; }
     inline ToolsPtr GetTools() const { return m_Drawer; }

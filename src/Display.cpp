@@ -47,16 +47,3 @@ void Display::Draw(const std::string& content) {
     
     SDL_RenderCopy(renderer, TextTexture, nullptr, &AdjustR);
 }
-
-void Display::SetWidth(int width) { m_UI_Element.SetWidth(width); }
-void Display::SetHeight(int height) { m_UI_Element.SetHeight(height); }
-void Display::SetPosition(float x, float y) { m_UI_Element.SetPosition(x, y); }
-void Display::SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetBackgroundColor(r, g, b, a); }
-void Display::SetContentColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetContentColor(r, g, b, a); }
-void Display::SetBorderColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetBorderColor(r, g, b, a); }
-
-// uint32_t color = 0xFF;
-// color = color << 8;
-// color = color | 0xA5;
-// color = color << 8;
-// color = color | 0x12;

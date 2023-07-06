@@ -15,16 +15,15 @@ public:
     inline UI_Element::Color GetBackgroundColor() const { return m_UI_Element.GetBackgroundColor(); }
     inline UI_Element::Color GetContentColor() const { return m_UI_Element.GetContentColor(); }
     inline UI_Element::Color GetBorderColor() const { return m_UI_Element.GetBorderColor(); }
-    inline UI_Element::Color IsHoverColor() const { return m_UI_Element.IsHoverColor(); }
     inline ToolsPtr GetTools() const { return m_UI_Element.GetTools(); }
 
-    void SetWidth(int);
-    void SetHeight(int);
-    void SetPosition(float, float);
-    void SetBackgroundColor(uint8_t, uint8_t, uint8_t, uint8_t);
-    void SetContentColor(uint8_t, uint8_t, uint8_t, uint8_t);
-    void SetBorderColor(uint8_t, uint8_t, uint8_t, uint8_t);
-    void SetTools(ToolsPtr);
+    inline void SetWidth(int width) { m_UI_Element.SetWidth(width); }
+    inline void SetHeight(int height) { m_UI_Element.SetHeight(height); }
+    inline void SetPosition(float x, float y) { m_UI_Element.SetPosition(x, y); }
+    inline void SetBackgroundColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetBackgroundColor(r, g, b, a); }
+    inline void SetContentColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetContentColor(r, g, b, a); }
+    inline void SetBorderColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) { m_UI_Element.SetBorderColor(r, g, b, a); }
+
 private:
     UI_Element m_UI_Element;
 };

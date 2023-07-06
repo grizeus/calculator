@@ -51,7 +51,7 @@ InputCode InputBoard::CheckInput(){
             case SDL_MOUSEBUTTONDOWN:
                 for (auto &button : m_Buttons) {
                     if (button.GetElement().Intersect(e.button.x, e.button.y))
-                        return button.Click();
+                        return button.GetCode();
                     }
                 break;
             case SDL_KEYDOWN:
