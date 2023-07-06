@@ -28,18 +28,18 @@ void InputBoard::AddButton(Coordinate pos, const std::string& symbol, InputCode 
 InputCode InputBoard::CheckInput(){
     SDL_Event e;
     bool quit = false;
-    while (quit == false) {
-            SDL_WaitEvent(&e);
-            switch (e.type) {
+    while (!quit) {
+        SDL_WaitEvent(&e);
+        switch (e.type) {
             case SDL_MOUSEMOTION:
                 for (auto &button : m_Buttons) {
                     if (button.GetElement().Intersect(e.button.x, e.button.y))
-                    {
-                        if (!button.IsHover()) {
-                            button.SetHover(true);
-                            return Unspecify;
+                        {
+                            if (!button.IsHover()) {
+                                button.SetHover(true);
+                                return Unspecify;
+                            }
                         }
-                    }
                     else {
                         if (button.IsHover()) {
                             button.SetHover(false);
@@ -52,59 +52,60 @@ InputCode InputBoard::CheckInput(){
                 for (auto &button : m_Buttons) {
                     if (button.GetElement().Intersect(e.button.x, e.button.y))
                         return button.GetCode();
-                    }
+                }
                 break;
             case SDL_KEYDOWN:
                 switch (e.key.keysym.sym) {
-                case SDLK_0:
-                    return Zero;
-                case SDLK_1:
-                    return One;
-                    break;
-                case SDLK_2:
-                    return Two;
-                case SDLK_3:
-                    return Three;
-                case SDLK_4:
-                    return Four;
-                case SDLK_5:
-                    return Five;
-                case SDLK_6:
-                    return Six;
-                case SDLK_7:
-                    return Seven;
-                case SDLK_8:
-                    return Eight;
-                case SDLK_9:
-                    return Nine;
-                case SDLK_PLUS:
-                    return Plus;
-                case SDLK_MINUS:
-                    return Minus;
-                case SDLK_ASTERISK:
-                    return Asterisk;
-                case SDLK_SLASH:
-                    return Slash;
-                case SDLK_PERCENT:
-                    return Percent;
-                case SDLK_DELETE:
-                    return Clear;
-                case SDLK_PERIOD:
-                    return Period;
-                case SDLK_EQUALS:
-                    return Equal;
-                case SDLK_BACKSPACE:
-                    return Backspace;
-                default:
-                    return Unspecify;
+                    case SDLK_0:
+                        return Zero;
+                    case SDLK_1:
+                        return One;
+                        break;
+                    case SDLK_2:
+                        return Two;
+                    case SDLK_3:
+                        return Three;
+                    case SDLK_4:
+                        return Four;
+                    case SDLK_5:
+                        return Five;
+                    case SDLK_6:
+                        return Six;
+                    case SDLK_7:
+                        return Seven;
+                    case SDLK_8:
+                        return Eight;
+                    case SDLK_9:
+                        return Nine;
+                    case SDLK_PLUS:
+                        return Plus;
+                    case SDLK_MINUS:
+                        return Minus;
+                    case SDLK_ASTERISK:
+                        return Asterisk;
+                    case SDLK_SLASH:
+                        return Slash;
+                    case SDLK_PERCENT:
+                        return Percent;
+                    case SDLK_DELETE:
+                        return Clear;
+                    case SDLK_PERIOD:
+                        return Period;
+                    case SDLK_EQUALS:
+                        return Equal;
+                    case SDLK_BACKSPACE:
+                        return Backspace;
+                    default:
+                        return Unspecify;
                 }
             case SDL_QUIT:
                 quit = true;
+                break;
             default:
                 return Unspecify;
                 break;
-            }
         }
+    }
     return Unspecify;
 }
 
