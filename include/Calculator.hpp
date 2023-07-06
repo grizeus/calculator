@@ -31,8 +31,8 @@ public:
     void DisplayResult();
     void Processing(InputCode input);
 
-    double Compute(const std::string&, const std::string&);
-    double Compute(const std::string&);
+    std::string Compute(const std::string&, const std::string&);
+    std::string Compute(const std::string&);
 private:
     State m_CurrentState;
     Operand m_Operand1;

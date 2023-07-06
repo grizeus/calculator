@@ -1,4 +1,5 @@
 #include "../include/Calculator.hpp"
+#include <iomanip>
 #include <iostream>
 
 namespace {
@@ -104,7 +105,7 @@ void Calculator::Processing(InputCode input) {
             }
             else if (IsUnOperator(input)) {
                 m_Op = InputCodeMap[input][0];
-                m_Operand1 = std::to_string(Compute(m_Operand1.data));
+                m_Operand1 = Compute(m_Operand1.data);
                 if (IsDigit(input)) {
                     m_Operand1.data.clear();
                     m_CurrentState = State::WaitForOperand1;
@@ -158,12 +159,12 @@ void Calculator::Processing(InputCode input) {
             }
             else if (IsUnOperator(input)) {
                 m_Op = InputCodeMap[input][0];
-                m_Operand2 = std::to_string(Compute(m_Operand2.data));
+                m_Operand2 = Compute(m_Operand2.data);
             }
             else if (IsBinOperator(input)) {
                 m_Op = InputCodeMap[input][0];
                 if (!m_Operand2.data.empty()){
-                    m_Operand1 = std::to_string(Compute(m_Operand1.data, m_Operand2.data));
+                    m_Operand1 = Compute(m_Operand1.data, m_Operand2.data);
                 }
                 m_CurrentState = State::WaitForOperand2;
             }
@@ -171,7 +172,7 @@ void Calculator::Processing(InputCode input) {
                 if (m_Operand2.data.empty()){
                     m_Operand2 = m_Operand1;
                 }
-                m_Operand1 = std::to_string(Compute(m_Operand1.data, m_Operand2.data));
+                m_Operand1 = Compute(m_Operand1.data, m_Operand2.data);
                 m_Operand2.data.clear();
                 m_CurrentState = State::WaitForOperand2;
             }
@@ -181,7 +182,7 @@ void Calculator::Processing(InputCode input) {
     }
 }
 
-double Calculator::Compute(const std::string& str1, const std::string& str2) {
+std::string Calculator::Compute(const std::string& str1, const std::string& str2) {
     double result;
     switch (m_Op) {
         case '+':
@@ -197,10 +198,12 @@ double Calculator::Compute(const std::string& str1, const std::string& str2) {
             result = std::stod(str1) / std::stod(str2);
             break;
     }
-    return result;
+    std::ostringstream oss;
+    oss << std::setprecision(8) << std::noshowpoint << result;
+    return oss.str();
 }
 
-double Calculator::Compute(const std::string& str) {
+std::string Calculator::Compute(const std::string& str) {
     double result;
     switch (m_Op) {
         case '%':
@@ -216,5 +219,7 @@ double Calculator::Compute(const std::string& str) {
             result = 1 / std::stod(str);
             break;
     }
-    return result;
+    std::ostringstream oss;
+    oss << std::setprecision(8) << std::noshowpoint << result;
+    return oss.str();
 }

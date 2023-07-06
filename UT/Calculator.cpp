@@ -17,10 +17,10 @@ TEST_F(TestCalc, add) {
 	calc->SetOperator('+');
 
 	// Act
-	double result = calc->Compute("2", "2");
+	std::string result = calc->Compute("2", "2");
 
 	// Assert
-	EXPECT_DOUBLE_EQ(result, 4.0);
+	EXPECT_EQ(result, "4");
 }
 
 TEST_F(TestCalc, subtract) {
@@ -28,20 +28,20 @@ TEST_F(TestCalc, subtract) {
 	calc->SetOperator('-');
 
 	// Act
-	double result = calc->Compute("26", "2");
+	std::string result = calc->Compute("26", "2");
 
 	// Assert
-	EXPECT_DOUBLE_EQ(result, 24.0);
+	EXPECT_EQ(result, "24");
 }
 
 TEST_F(TestCalc, mult) {
 	// Arrange
 	calc->SetOperator('*');
 	// Act
-	double result = calc->Compute("3", "2");
+    std::string result = calc->Compute("3", "2");
 
-	// Assert
-	EXPECT_DOUBLE_EQ(result, 6.0);
+        // Assert
+	EXPECT_EQ(result, "6");
 }
 
 TEST_F(TestCalc, divide) {
@@ -49,10 +49,10 @@ TEST_F(TestCalc, divide) {
 	calc->SetOperator('/');
 
 	// Act
-	double result = calc->Compute("169", "13");
+	std::string result = calc->Compute("169", "13");
 
 	// Assert
-	EXPECT_DOUBLE_EQ(result, 13.0);
+	EXPECT_EQ(result, "13");
 }
 
 TEST_F(TestCalc, percent) {
@@ -60,10 +60,10 @@ TEST_F(TestCalc, percent) {
 	calc->SetOperator('%');
 
 	// Act
-	double result = calc->Compute("5");
+	std::string result = calc->Compute("5");
 
 	// Assert
-	EXPECT_DOUBLE_EQ(result, 0.05);
+	EXPECT_EQ(result, "0.05");
 }
 
 TEST_F(TestCalc, square) {
@@ -71,10 +71,10 @@ TEST_F(TestCalc, square) {
 	calc->SetOperator('s');
 
 	// Act
-	double result = calc->Compute("12");
+	std::string result = calc->Compute("12");
 
 	// Assert
-	EXPECT_DOUBLE_EQ(result, 144.0);
+	EXPECT_EQ(result, "144");
 }
 
 TEST_F(TestCalc, squareRoot) {
@@ -82,10 +82,10 @@ TEST_F(TestCalc, squareRoot) {
 	calc->SetOperator('r');
 
 	// Act
-	double result = calc->Compute("169");
+	std::string result = calc->Compute("169");
 
 	// Assert
-	EXPECT_DOUBLE_EQ(result, 13.0);
+	EXPECT_EQ(result, "13");
 }
 
 TEST_F(TestCalc, inverse) {
@@ -93,10 +93,10 @@ TEST_F(TestCalc, inverse) {
 	calc->SetOperator('i');
 
 	// Act
-	double result = calc->Compute("20");
+	std::string result = calc->Compute("20");
 
 	// Assert
-	EXPECT_DOUBLE_EQ(result, 0.05);
+	EXPECT_EQ(result, "0.05");
 }
 
 TEST_F(TestCalc, changeSign) {
