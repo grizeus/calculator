@@ -15,6 +15,7 @@ namespace {
     auto IsUnOperator = [](InputCode input) -> bool {
         return (input == Percent || input == Square || input == SquareRoot || input == Inverse);
     };
+
 }
 
 Calculator::Calculator(ToolsPtr drawer)
@@ -65,7 +66,7 @@ void Calculator::Processing(InputCode input) {
     switch (m_CurrentState) {
         case State::WaitForOperand1:
             if (IsDigit(input)) {
-                if (m_Operand1.data.size() < 12)
+                if (m_Operand1.data.size() < 11)
                     m_Operand1 += InputCodeMap[input];
             }
             else if (input == Period && !m_Operand1.HasPeriodTyped) {
@@ -106,7 +107,10 @@ void Calculator::Processing(InputCode input) {
             }
             else if (IsUnOperator(input)) {
                 m_Op = InputCodeMap[input][0];
-                m_Operand1 = Compute(m_Operand1.data);
+                std::string buff = Compute(m_Operand1.data);
+                if (!IsOverFlow(buff)) {
+                    m_Operand1.data = buff;
+                }
                 if (IsDigit(input)) {
                     m_Operand1.data.clear();
                     m_CurrentState = State::WaitForOperand1;
@@ -120,7 +124,7 @@ void Calculator::Processing(InputCode input) {
         
         case State::WaitForOperand2:
             if (IsDigit(input)) {
-                if (m_Operand2.data.size() < 12) {
+                if (m_Operand2.data.size() < 11) {
                     m_Operand2 += InputCodeMap[input];
                     IsSecondTyped = true;
                 }
@@ -176,19 +180,28 @@ void Calculator::Processing(InputCode input) {
             else if (IsUnOperator(input)) {
                 m_Op = InputCodeMap[input][0];
                 if (m_Operand2.data.empty()) {
-                    m_Operand1 = Compute(m_Operand1.data);
+                    std::string buff = Compute(m_Operand1.data);
+                    if (IsOverFlow(buff)) 
+                        break;
+                    m_Operand1 = buff;
                     break;
                 }
-                m_Operand2 = Compute(m_Operand2.data);
+                std::string buff = Compute(m_Operand2.data);
+                if (IsOverFlow(buff)) 
+                    break;
+                m_Operand2 = buff;
             }
             else if (IsBinOperator(input)) {
                 if (m_Operand2.data.empty()){
                     m_Op = InputCodeMap[input][0];
                     break;
                 }
-                m_Operand1 = Compute(m_Operand1.data, m_Operand2.data);
-                m_Op = InputCodeMap[input][0];
+                std::string buff = Compute(m_Operand1.data, m_Operand2.data);
+                if (IsOverFlow(buff)) 
+                    break;
+                m_Operand1 = buff;
                 m_Operand2.data.clear();
+                m_Op = InputCodeMap[input][0];
                 IsSecondTyped = false;
                 m_CurrentState = State::WaitForOperand2;
             }
@@ -196,7 +209,10 @@ void Calculator::Processing(InputCode input) {
                 if (m_Operand2.data.empty()){
                     m_Operand2 = m_Operand1;
                 }
-                m_Operand1 = Compute(m_Operand1.data, m_Operand2.data);
+                std::string buff = Compute(m_Operand1.data, m_Operand2.data);
+                if (IsOverFlow(buff)) 
+                    break;
+                m_Operand1 = buff;
                 m_Operand2.data.clear();
                 IsSecondTyped = false;
                 m_CurrentState = State::WaitForOperand2;
@@ -224,8 +240,11 @@ std::string Calculator::Compute(const std::string& str1, const std::string& str2
             break;
     }
     std::ostringstream oss;
-    oss << std::setprecision(8) << std::noshowpoint << result;
-    return oss.str();
+    oss << std::setprecision(4) << std::noshowpoint << result;
+    if (oss.str().size() < 13)
+        return oss.str();
+    else
+        return "Overflow";
 }
 
 std::string Calculator::Compute(const std::string& str) {
@@ -245,6 +264,19 @@ std::string Calculator::Compute(const std::string& str) {
             break;
     }
     std::ostringstream oss;
-    oss << std::setprecision(8) << std::noshowpoint << result;
-    return oss.str();
+    oss << std::setprecision(4) << std::noshowpoint << result;
+    if (oss.str().size() < 13)
+        return oss.str();
+    else
+        return "Overflow";
+}
+
+bool Calculator::IsOverFlow(const std::string& str) {
+    if (str == "Overflow") {
+        m_Operand1.data.clear();
+        m_Operand2.data.clear();
+        m_CurrentState = State::WaitForOperand1;
+        return true;
+    }
+    return false;
 }

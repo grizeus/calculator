@@ -30,6 +30,7 @@ public:
 
     void DisplayResult();
     void Processing(InputCode input);
+    bool IsOverFlow(const std::string&);
 
     std::string Compute(const std::string&, const std::string&);
     std::string Compute(const std::string&);
