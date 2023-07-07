@@ -125,7 +125,16 @@ void Calculator::Processing(InputCode input) {
                 m_Operand2.HasPeriodTyped = true;
             }
             else if (input == PlusMinus) {
-                if (!m_Operand2.IsNegative) {
+                if (m_Operand2.data.empty()) {
+                    if (!m_Operand1.IsNegative) {
+                        m_Operand1.data = "-" + m_Operand1.data;
+                        m_Operand1.IsNegative = true;
+                    } else {
+                        m_Operand1.data.erase(m_Operand1.data.begin());
+                        m_Operand1.IsNegative = false;
+                    }
+                }
+                else if (!m_Operand2.IsNegative) {
                     m_Operand2.data = "-" + m_Operand2.data;
                     m_Operand2.IsNegative = true;
                 }
