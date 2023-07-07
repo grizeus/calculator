@@ -51,6 +51,7 @@ void Calculator::DisplayResult() {
             std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
             std::cout << "0" << std::endl;
             m_Display.Draw(m_Operand1.data);
+            // m_Display.Draw("0");
         }
         else {
             std::cout << "Size op2: " << m_Operand2.data.size() << std::endl;
@@ -176,10 +177,13 @@ void Calculator::Processing(InputCode input) {
                 m_Operand2 = Compute(m_Operand2.data);
             }
             else if (IsBinOperator(input)) {
-                m_Op = InputCodeMap[input][0];
-                if (!m_Operand2.data.empty()){
-                    m_Operand1 = Compute(m_Operand1.data, m_Operand2.data);
+                if (m_Operand2.data.empty()){
+                    m_Op = InputCodeMap[input][0];
+                    break;
                 }
+                m_Operand1 = Compute(m_Operand1.data, m_Operand2.data);
+                m_Op = InputCodeMap[input][0];
+                m_Operand2.data.clear();
                 m_CurrentState = State::WaitForOperand2;
             }
             else if (input == Equal) {
