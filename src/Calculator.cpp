@@ -39,21 +39,20 @@ void Calculator::DisplayResult() {
             std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
             std::cout << "0" << std::endl;
             m_Display.Draw("0");
-        }
-        else {
+        } else {
             std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
             std::cout << m_Operand1.data << std::endl;
             m_Display.Draw(m_Operand1.data);
         }
-    }
-    else {
+    } else {
         if (m_Operand2.data.empty()) {
             std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
             std::cout << "0" << std::endl;
-            m_Display.Draw(m_Operand1.data);
-            // m_Display.Draw("0");
-        }
-        else {
+            if (IsSecondTyped)
+                m_Display.Draw("0");
+            else
+                m_Display.Draw(m_Operand1.data);
+        } else {
             std::cout << "Size op2: " << m_Operand2.data.size() << std::endl;
             std::cout << m_Operand2.data << std::endl;
             m_Display.Draw(m_Operand2.data);
@@ -75,8 +74,7 @@ void Calculator::Processing(InputCode input) {
                 if (!m_Operand1.IsNegative) {
                     m_Operand1.data = "-" + m_Operand1.data;
                     m_Operand1.IsNegative= true;
-                }
-                else {
+                } else {
                     m_Operand1.data.erase(m_Operand1.data.begin());
                     m_Operand1.IsNegative = false;
                 }
@@ -91,14 +89,14 @@ void Calculator::Processing(InputCode input) {
             else if (input == Backspace) {
                 if (m_Operand1.data.size() < 2) {
                     m_Operand1.data.clear();
-                    return;
+                    break;
                 }
                 else if (m_Operand1.data.back() == '.')
                     m_Operand1.HasPeriodTyped = false;
                 else if (m_Operand1.data.back() == '-') {
                     if (m_Operand1.data.size() == 2) {
                         m_Operand1.data.clear();
-                        return;
+                        break;
                     }
                     m_Operand1.IsNegative = false;
                 }
@@ -119,11 +117,14 @@ void Calculator::Processing(InputCode input) {
             break;
         
         case State::WaitForOperand2:
-            if (IsDigit(input))
+            if (IsDigit(input)) {
                 m_Operand2 += InputCodeMap[input];
+                IsSecondTyped = true;
+            }
             else if (input == Period && !m_Operand2.HasPeriodTyped) {
                 m_Operand2 += InputCodeMap[input];
                 m_Operand2.HasPeriodTyped = true;
+                IsSecondTyped = true;
             }
             else if (input == PlusMinus) {
                 if (m_Operand2.data.empty()) {
@@ -138,8 +139,7 @@ void Calculator::Processing(InputCode input) {
                 else if (!m_Operand2.IsNegative) {
                     m_Operand2.data = "-" + m_Operand2.data;
                     m_Operand2.IsNegative = true;
-                }
-                else {
+                } else {
                     m_Operand2.data.erase(m_Operand2.data.begin());
                     m_Operand2.IsNegative = false;
                 }
@@ -150,6 +150,7 @@ void Calculator::Processing(InputCode input) {
             else if (input == Clear) {
                 m_Operand1.data.clear();
                 m_Operand2.data.clear();
+                IsSecondTyped = false;
                 m_CurrentState = State::WaitForOperand1;
             }
             else if (input == Backspace) {
@@ -184,6 +185,7 @@ void Calculator::Processing(InputCode input) {
                 m_Operand1 = Compute(m_Operand1.data, m_Operand2.data);
                 m_Op = InputCodeMap[input][0];
                 m_Operand2.data.clear();
+                IsSecondTyped = false;
                 m_CurrentState = State::WaitForOperand2;
             }
             else if (input == Equal) {
@@ -192,6 +194,7 @@ void Calculator::Processing(InputCode input) {
                 }
                 m_Operand1 = Compute(m_Operand1.data, m_Operand2.data);
                 m_Operand2.data.clear();
+                IsSecondTyped = false;
                 m_CurrentState = State::WaitForOperand2;
             }
             break;
