@@ -140,18 +140,19 @@ void Calculator::Processing(InputCode input) {
             else if (input == Clear) {
                 m_Operand1.data.clear();
                 m_Operand2.data.clear();
+                m_CurrentState = State::WaitForOperand1;
             }
             else if (input == Backspace) {
                 if (m_Operand2.data.size() < 2) {
                     m_Operand2.data.clear();
-                    return;
+                    break;
                 }
                 else if (m_Operand2.data.back() == '.')
                     m_Operand2.HasPeriodTyped = false;
                 else if (m_Operand2.data.back() == '-') {
                     if (m_Operand2.data.size() == 2) {
                         m_Operand2.data.clear();
-                        return;
+                        break;
                     }
                     m_Operand2.IsNegative = false;
                 }
@@ -159,6 +160,10 @@ void Calculator::Processing(InputCode input) {
             }
             else if (IsUnOperator(input)) {
                 m_Op = InputCodeMap[input][0];
+                if (m_Operand2.data.empty()) {
+                    m_Operand1 = Compute(m_Operand1.data);
+                    break;
+                }
                 m_Operand2 = Compute(m_Operand2.data);
             }
             else if (IsBinOperator(input)) {

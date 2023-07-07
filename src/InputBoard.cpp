@@ -30,9 +30,9 @@ InputCode InputBoard::CheckInput() {
     SDL_Event e;
     bool quit = false;
     while (!quit) {
-        while (SDL_WaitEvent(&e) != 0 ) {
+        SDL_PollEvent(&e); 
             if (e.type == SDL_QUIT)
-                quit = true;
+                return Quit;
             else if (e.type == SDL_MOUSEMOTION) {
                 for (auto &button : m_Buttons) {
                     if (button.GetElement().Intersect(e.button.x, e.button.y)) {
@@ -120,7 +120,6 @@ InputCode InputBoard::CheckInput() {
                 }
             }
         }
-    }
     return Unspecify;
 }
 

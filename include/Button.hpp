@@ -9,7 +9,7 @@ enum InputCode {
     Four, Five, Six, Minus,
     Seven, Eight, Nine, Asterisk,
     Inverse, Square, SquareRoot, Slash,
-    Percent, ClearEntry, Clear, Backspace
+    Percent, ClearEntry, Clear, Backspace, Quit
 };
 
 class Button {

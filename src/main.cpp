@@ -22,6 +22,8 @@ int main(int argc, char** argv) {
 
     while (true) {
         InputCode input = buttons.CheckInput();
+        if (input == Quit)
+            break;
         calculator.Processing(input);
         try {
             SDL_RenderClear(tool->m_Renderer);
