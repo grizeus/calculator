@@ -64,8 +64,10 @@ void Calculator::DisplayResult() {
 void Calculator::Processing(InputCode input) {
     switch (m_CurrentState) {
         case State::WaitForOperand1:
-            if (IsDigit(input))
-                m_Operand1 += InputCodeMap[input];
+            if (IsDigit(input)) {
+                if (m_Operand1.data.size() < 12)
+                    m_Operand1 += InputCodeMap[input];
+            }
             else if (input == Period && !m_Operand1.HasPeriodTyped) {
                 m_Operand1 += InputCodeMap[input];
                 m_Operand1.HasPeriodTyped = true;
@@ -118,8 +120,10 @@ void Calculator::Processing(InputCode input) {
         
         case State::WaitForOperand2:
             if (IsDigit(input)) {
-                m_Operand2 += InputCodeMap[input];
-                IsSecondTyped = true;
+                if (m_Operand2.data.size() < 12) {
+                    m_Operand2 += InputCodeMap[input];
+                    IsSecondTyped = true;
+                }
             }
             else if (input == Period && !m_Operand2.HasPeriodTyped) {
                 m_Operand2 += InputCodeMap[input];
