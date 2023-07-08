@@ -25,15 +25,11 @@ int main(int argc, char** argv) {
         if (input == Quit)
             break;
         calculator.Processing(input);
-        try {
-            SDL_RenderClear(tool->m_Renderer);
-            calculator.DisplayResult();
-            for (auto& button : buttons.GetButtons()) 
-                button.Draw();
-            SDL_RenderPresent(tool->m_Renderer);
-        }catch (const std::exception& e) {
-            std::cout << e.what() << std::endl;
-        }
+        SDL_RenderClear(tool->m_Renderer);
+        calculator.DisplayResult();
+        for (auto& button : buttons.GetButtons()) 
+            button.Draw();
+        SDL_RenderPresent(tool->m_Renderer);
     }
     return 0;
 }
