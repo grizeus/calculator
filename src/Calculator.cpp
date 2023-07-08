@@ -1,4 +1,5 @@
 #include "../include/Calculator.hpp"
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
 
@@ -97,7 +98,7 @@ void Calculator::Processing(InputCode input) {
                 else if (m_Operand1.data.back() == '.')
                     m_Operand1.HasPeriodTyped = false;
                 else if (m_Operand1.data.back() == '-') {
-                    if (m_Operand1.data.size() == 2) {
+                    if (m_Operand1.data.size() < 3) {
                         m_Operand1.data.clear();
                         break;
                     }
@@ -108,9 +109,9 @@ void Calculator::Processing(InputCode input) {
             else if (IsUnOperator(input)) {
                 m_Op = InputCodeMap[input][0];
                 std::string buff = Compute(m_Operand1.data);
-                if (!IsOverFlow(buff)) {
-                    m_Operand1.data = buff;
-                }
+                if (IsOverFlow(buff))
+                    break;
+                m_Operand1.data = buff;
                 if (IsDigit(input)) {
                     m_Operand1.data.clear();
                     m_CurrentState = State::WaitForOperand1;
@@ -154,12 +155,14 @@ void Calculator::Processing(InputCode input) {
             }
             else if (input == ClearEntry) {
                 m_Operand2.data.clear();
+                break;
             }
             else if (input == Clear) {
                 m_Operand1.data.clear();
                 m_Operand2.data.clear();
                 IsSecondTyped = false;
                 m_CurrentState = State::WaitForOperand1;
+                break;
             }
             else if (input == Backspace) {
                 if (m_Operand2.data.size() < 2) {
@@ -169,13 +172,15 @@ void Calculator::Processing(InputCode input) {
                 else if (m_Operand2.data.back() == '.')
                     m_Operand2.HasPeriodTyped = false;
                 else if (m_Operand2.data.back() == '-') {
-                    if (m_Operand2.data.size() == 2) {
+                    if (m_Operand2.data.size() < 3) {
                         m_Operand2.data.clear();
                         break;
                     }
                     m_Operand2.IsNegative = false;
+                    break;
                 }
                 m_Operand2.data.pop_back();
+                break;
             }
             else if (IsUnOperator(input)) {
                 m_Op = InputCodeMap[input][0];
@@ -183,13 +188,13 @@ void Calculator::Processing(InputCode input) {
                     std::string buff = Compute(m_Operand1.data);
                     if (IsOverFlow(buff)) 
                         break;
-                    m_Operand1 = buff;
+                    m_Operand1.data = buff;
                     break;
                 }
                 std::string buff = Compute(m_Operand2.data);
                 if (IsOverFlow(buff)) 
                     break;
-                m_Operand2 = buff;
+                m_Operand2.data = buff;
             }
             else if (IsBinOperator(input)) {
                 if (m_Operand2.data.empty()){
@@ -197,25 +202,27 @@ void Calculator::Processing(InputCode input) {
                     break;
                 }
                 std::string buff = Compute(m_Operand1.data, m_Operand2.data);
-                if (IsOverFlow(buff)) 
+                if (IsOverFlow(buff))
                     break;
-                m_Operand1 = buff;
+                m_Operand1.data = std::move(buff);
                 m_Operand2.data.clear();
-                m_Op = InputCodeMap[input][0];
                 IsSecondTyped = false;
                 m_CurrentState = State::WaitForOperand2;
+                m_Op = InputCodeMap[input][0];
+                break;
             }
             else if (input == Equal) {
                 if (m_Operand2.data.empty()){
                     m_Operand2 = m_Operand1;
                 }
                 std::string buff = Compute(m_Operand1.data, m_Operand2.data);
-                if (IsOverFlow(buff)) 
+                if (IsOverFlow(buff))
                     break;
-                m_Operand1 = buff;
+                m_Operand1.data = buff;
                 m_Operand2.data.clear();
                 IsSecondTyped = false;
                 m_CurrentState = State::WaitForOperand2;
+                break;
             }
             break;
         default:
