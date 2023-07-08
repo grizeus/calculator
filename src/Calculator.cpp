@@ -37,28 +37,20 @@ Calculator::Calculator()
 
 void Calculator::DisplayResult() {
     if (m_CurrentState == State::WaitForOperand1) {
-        if (m_Operand1.data.empty()) {
-            std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
-            std::cout << "0" << std::endl;
+        if (m_Operand1.data.empty()) 
             m_Display.Draw("0");
-        } else {
-            std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
-            std::cout << m_Operand1.data << std::endl;
+        else 
             m_Display.Draw(m_Operand1.data);
-        }
-    } else {
+    } 
+    else {
         if (m_Operand2.data.empty()) {
-            std::cout << "Size op1: " << m_Operand1.data.size() << std::endl;
-            std::cout << "0" << std::endl;
             if (IsSecondTyped)
                 m_Display.Draw("0");
             else
                 m_Display.Draw(m_Operand1.data);
-        } else {
-            std::cout << "Size op2: " << m_Operand2.data.size() << std::endl;
-            std::cout << m_Operand2.data << std::endl;
+        } 
+        else 
             m_Display.Draw(m_Operand2.data);
-        }
     }
 }
 
