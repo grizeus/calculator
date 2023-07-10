@@ -1,6 +1,3 @@
 .vscode
 build
-media
 .cal*
-.cache/clangd/index/*
-googletest
