@@ -26,12 +26,12 @@ void Display::Draw(const std::string& content) {
     SDL_Renderer* renderer = GetTools()->m_Renderer;
     TTF_Font* font = GetTools()->m_Font;
     SDL_Rect DisplayRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()};
-    int index;
+    int WidthKoeff;
     if (content.size() < 2)
-        index = 1;
+        WidthKoeff = 1;
     else
-        index = content.size();
-    SDL_Rect AdjustR = {static_cast<int>(GetPosition().first + GetWidth() - GetWidth() * 4 / 49 * index), static_cast<int>(GetPosition().second + GetHeight() * 2 / 8 ), 0, 0}; // magics
+        WidthKoeff = content.size();
+    SDL_Rect AdjustR = {static_cast<int>(GetPosition().first + GetWidth() - GetWidth() * 4 / 49 * WidthKoeff), static_cast<int>(GetPosition().second + GetHeight() * 2 / 8 ), 0, 0}; // magics
     TTF_SizeText(font, content.c_str(), &AdjustR.w, &AdjustR.h);
     SDL_SetRenderDrawColor(renderer, GetBorderColor().red, GetBorderColor().green, GetBorderColor().blue, GetBorderColor().alpha);
     SDL_RenderDrawRect(renderer, &DisplayRect);

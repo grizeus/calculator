@@ -11,7 +11,7 @@ InputBoard::InputBoard(ToolsPtr drawer)
         "4","5","6","-",
         "7","8","9","X",
         "⅟x","x²","√","÷",
-        "%","CE","C","⌫"
+        "%","CE","C","←"
     };
 
     for (int i = 0; i < 6; ++i) {

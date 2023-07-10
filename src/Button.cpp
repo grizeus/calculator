@@ -9,14 +9,14 @@ Button::Button(Coordinate pos, ToolsPtr drawer, const std::string &symbol, Input
     SetPosition(pos.first, pos.second);
     SetBorderColor(0x1E, 0x90, 0xFF, 0xCF); // dodger blue
     SetBackgroundColor(0xFF, 0xFF, 0xFF, 0xFF);
-    // SetHoverColor(0xF5, 0xFF, 0xFA, 0xFF); // mint cream
-    SetHoverColor(0xF5, 0x00, 0x00, 0xFF);   // red cream
+    SetHoverColor(0xB0, 0xC4, 0xDE, 0xFF); // light steel blue 
     SetContentColor(0x1E, 0x90, 0xFF, 0xCF); // dodger blue
     m_IsHover = false;
 }
 
 void Button::Draw() {
     SDL_Renderer* renderer = GetTools()->m_Renderer;
+    TTF_Font* font = GetTools()->m_Font;
     if (m_IsHover)
         SDL_SetRenderDrawColor(renderer, GetHoverColor().red, GetHoverColor().green, GetHoverColor().blue, GetHoverColor().alpha);
     else
@@ -24,7 +24,7 @@ void Button::Draw() {
 
     SDL_Rect ButtonRect = {static_cast<int>(GetPosition().first), static_cast<int>(GetPosition().second), GetWidth(), GetHeight()}; 
     SDL_RenderFillRect(renderer, &ButtonRect);
-    SDL_Surface* TextSurface = TTF_RenderUTF8_Solid(GetTools()->m_Font, m_Symbol.c_str(), m_UI_Element.ConvertToSDLColor(GetContentColor()));
+    SDL_Surface* TextSurface = TTF_RenderUTF8_Solid(font, m_Symbol.c_str(), m_UI_Element.ConvertToSDLColor(GetContentColor()));
     if (TextSurface == nullptr) 
         throw std::runtime_error(SDL_GetError());
 
@@ -35,17 +35,3 @@ void Button::Draw() {
     SDL_RenderCopy(renderer, TextTexture, nullptr, &ButtonRect);
     
 }
-
-// InputCode Button::Click( SDL_Event e) {
-//     while (SDL_WaitEvent(&e)) {
-//         switch (e.type) {
-//         case SDL_MOUSEBUTTONDOWN:
-//             if (m_UI_Element.Intersect(e.button.x, e.button.y))
-//                 return m_Code;
-//             break;
-//         default:
-//             return Unspecify;
-//         }
-//     }
-//     return Unspecify;
-// }
